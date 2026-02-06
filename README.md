@@ -23,13 +23,13 @@ Based on [Invisible Details of Interaction Design](https://rauno.me/craft/intera
 From your project's root directory:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/olozano/rauno-design-skills/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/olzn/rauno-design-skills/main/install.sh | sh
 ```
 
 Or clone and run locally:
 
 ```sh
-git clone https://github.com/olozano/rauno-design-skills.git
+git clone https://github.com/olzn/rauno-design-skills.git
 cd rauno-design-skills
 sh install.sh
 ```
