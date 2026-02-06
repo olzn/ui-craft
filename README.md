@@ -36,12 +36,12 @@ sh install.sh
 
 ### Option B: Manual
 
-Copy the skill files into your project's `.claude/skills/` directory:
+Download the skill files directly into your project's `.claude/skills/` directory:
 
 ```sh
 mkdir -p .claude/skills
-cp interaction-design-principles.md .claude/skills/
-cp web-interface-guidelines.md .claude/skills/
+curl -fsSL https://raw.githubusercontent.com/olzn/rauno-design-skills/main/interaction-design-principles.md -o .claude/skills/interaction-design-principles.md
+curl -fsSL https://raw.githubusercontent.com/olzn/rauno-design-skills/main/web-interface-guidelines.md -o .claude/skills/web-interface-guidelines.md
 ```
 
 ## Attribution
