@@ -8,12 +8,17 @@ REPO_URL="https://raw.githubusercontent.com/olzn/rauno-design-skills/main"
 TARGET_DIR=".claude/skills"
 SKILLS="interaction-design-principles.md web-interface-guidelines.md"
 
+# Detect if running from a local clone by checking for a skill file next to the script
 SCRIPT_DIR="$(cd "$(dirname "$0" 2>/dev/null)" 2>/dev/null && pwd 2>/dev/null || echo "")"
+LOCAL=false
+if [ -n "$SCRIPT_DIR" ] && [ -f "$SCRIPT_DIR/interaction-design-principles.md" ]; then
+  LOCAL=true
+fi
 
 mkdir -p "$TARGET_DIR"
 
 for skill in $SKILLS; do
-  if [ -n "$SCRIPT_DIR" ] && [ -f "$SCRIPT_DIR/$skill" ]; then
+  if [ "$LOCAL" = true ]; then
     cp "$SCRIPT_DIR/$skill" "$TARGET_DIR/$skill"
     echo "Installed $skill -> $TARGET_DIR/$skill"
   else
