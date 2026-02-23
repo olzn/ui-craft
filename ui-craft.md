@@ -1,45 +1,39 @@
 ---
 name: ui-craft
-description: Apply the "Family Values" design philosophy to every UI you build. Use this skill whenever creating frontends, components, apps, landing pages, dashboards, or any user-facing interface. Enforces three core principles — Simplicity (gradual revelation), Fluidity (seamless transitions), and Delight (selective emphasis) — plus a concrete implementation checklist (CSS details, accessibility, touch, performance) drawn from Rauno Freiberg's interface guidelines. Prevents generic, static, lifeless UI. Works alongside frontend-design (visual aesthetics) and interface-craft (animation DSL).
+description: Apply the "Family Values" design philosophy to every UI you build. Use this skill whenever creating frontends, components, apps, landing pages, dashboards, or any user-facing interface. Enforces three core principles — Simplicity (gradual revelation), Fluidity (seamless transitions), and Delight (selective emphasis) — plus a concrete implementation checklist (CSS details, accessibility, touch, performance) drawn from Rauno Freiberg's interface guidelines. Prevents generic, static, lifeless UI.
 ---
 
 # UI Craft
 
-This skill encodes the design philosophy behind [Family](https://family.co) — a product widely praised for feeling *alive*, *welcoming*, and *intentional*. Originally documented by Benji Taylor at [benji.org/family-values](https://benji.org/family-values).
+This skill encodes the design philosophy behind [Family](https://family.co), originally documented by Benji Taylor at [benji.org/family-values](https://benji.org/family-values), combined with Rauno Freiberg's interface implementation guidelines.
 
-**Read this before writing any UI code. Every time.**
-
-The user wants something built. Your job is to make it feel like a human who gives a shit designed it.
+**Apply this before writing any UI code.**
 
 ---
 
 ## The Three Pillars
 
-Ordered by priority. You cannot have Delight without Fluidity, and you cannot have Fluidity without Simplicity.
+Apply in order. You cannot have Delight without Fluidity, and you cannot have Fluidity without Simplicity.
 
 ---
 
 ### 1. Simplicity — Gradual Revelation
 
-> "Each action by the user makes the interface unfold and evolve, much like walking through a series of interconnected rooms."
-
-**The problem**: Most UIs dump everything at once — every feature, every option, every edge case, all visible, all the time. This transfers cognitive burden from the designer to the user.
-
-**The principle**: Show only what matters *right now*. The interface should feel like walking through rooms — you glimpse what's next before you arrive.
+Show only what matters right now. The interface should unfold progressively, not dump everything at once.
 
 **Rules**:
 
-- **One primary action per view.** Two equally weighted CTAs = failure. Make everything else secondary.
-- **Progressive disclosure over feature dumps.** Layered trays, step-by-step flows, expandable sections. Never show a 12-field form when 3 steps of 4 fields works.
+- **One primary action per view.** Two equally weighted CTAs is a failure. Make everything else secondary.
+- **Progressive disclosure over feature dumps.** Use layered trays, step-by-step flows, expandable sections. Never render a 12-field form when 3 steps of 4 fields works.
 - **Context-preserving overlays over full-page navigations.** Sheets/trays/modals that overlay the current context keep users oriented. Full-screen transitions displace them.
-- **Vary heights of stacked layers.** Each subsequent sheet/tray must be a visibly different height so the progression is unmistakably clear. Never stack two identical-height layers.
-- **Every sheet/tray/modal needs a title and dismiss action.** Users must always know what they're looking at and how to get back.
-- **Trays adapt to context.** A tray appearing within a dark-themed flow should adopt a darker color scheme. The visual environment follows the user.
-- **Trays can launch full-screen flows.** A compact tray is a valid entry point for a multi-step full-screen experience — don't force a binary choice between "tray" and "page."
-- **Use trays for transient actions; full screens for persistent destinations.** Confirmations, warnings, and contextual info = tray. Settings, core content = full screen.
+- **Vary heights of stacked layers.** Each subsequent sheet/tray must be a visibly different height so the progression is clear. Never stack two identical-height layers.
+- **Every sheet/tray/modal needs a title and dismiss action.**
+- **Trays adapt to context.** A tray within a dark-themed flow adopts a darker color scheme.
+- **Trays can launch full-screen flows.** A compact tray is a valid entry point for a multi-step full-screen experience.
+- **Trays for transient actions; full screens for persistent destinations.** Confirmations, warnings, contextual info = tray. Settings, core content = full screen.
 
 ```jsx
-// GOOD: Progressive tray — compact, focused, context-aware
+// Progressive tray — compact, focused, context-aware
 <Sheet>
   <SheetTrigger>Confirm Send</SheetTrigger>
   <SheetContent className="h-[45vh]"> {/* height varies from parent */}
@@ -47,40 +41,35 @@ Ordered by priority. You cannot have Delight without Fluidity, and you cannot ha
       <SheetTitle>Review Transaction</SheetTitle>
       <DismissButton />
     </SheetHeader>
-    {/* Core info only — no extras */}
     <Button>Send $42.00</Button>
   </SheetContent>
 </Sheet>
 ```
 
-**Self-check**: Can the user tell within 1 second what to do next? If not, simplify.
+**Verify**: Every view has exactly one visually dominant action. No view presents more than 5–7 interactive elements without progressive disclosure.
 
 ---
 
 ### 2. Fluidity — Seamless Transitions
 
-> "We fly instead of teleport."
-
-**The problem**: Static transitions make products feel dead. A dead product feels uncared for. Instant cuts destroy spatial orientation — where did that come from? Where did it go?
-
-**The principle**: Treat your app as a space with **unbreakable physical rules**. Know *why* a transition makes sense architecturally before adding it. Every element moves *from* somewhere *to* somewhere.
+Treat the app as a physical space. Every element moves *from* somewhere *to* somewhere. No teleportation.
 
 **Rules**:
 
-- **No instant show/hide.** Every element that appears or disappears must animate. Pick a transition that makes spatial sense — fade, slide, scale, morph.
-- **Shared element transitions.** If an element exists in both State A and State B (a card that expands, a button that becomes a sheet), it must visually *travel* between them. Never unmount and remount — morph.
-- **Directional consistency.** Navigate right (next step, next tab) → content enters from right. Go back → content enters from left. Tabs to the left of current slide left. This builds spatial memory.
-- **Text morphing over instant replacement.** When button labels change (e.g., "Continue" → "Confirm"), animate the transition. Identify shared letter sequences ("Con") — keep them fixed while the rest morphs. Use [torph](https://torph.lochie.me/) (`npm i torph`) — dependency-free, works with React/Vue/Svelte. Crossfade is the minimum fallback; shared-letter morphing is the ideal.
-- **Partial text changes: only animate what changes.** If a sentence gains or loses a word, keep the unchanged portion static. Animating unchanged text creates jarring redundancy.
-- **Persistent elements stay put.** If a header, card, or component persists across a transition, it must NOT animate out and back in. Only the changing parts move.
-- **Loading states travel to their destination.** A spinner doesn't just sit where triggered — it moves to where the user will look for results (e.g., after submitting a transaction, the spinner migrates to the activity tab icon).
-- **Micro-directional cues.** Chevrons, arrows, and carets should animate to reflect the action taken. A `→` becomes a `←` on back-navigation. An accordion chevron rotates on expand.
-- **Unified interpolation.** All visual elements driven by the same data should share the same lerp/easing. This makes the interface feel like *one thing breathing* rather than a bunch of parts updating independently. When the value changes, the line, the label, the axis, and the badge should all move as one.
+- **No instant show/hide.** Every element that appears or disappears must animate. Use the transition that makes spatial sense — fade, slide, scale, or morph.
+- **Shared element transitions.** If an element exists in both State A and State B (a card that expands, a button that becomes a sheet), morph it between them. Never unmount and remount.
+- **Directional consistency.** Navigate forward → content enters from right. Go back → content enters from left. Tabs left of current slide left, tabs right slide right.
+- **Text morphing over instant replacement.** When labels change (e.g., "Continue" → "Confirm"), animate the transition. Use [torph](https://torph.lochie.me/) (`npm i torph`) — dependency-free, works with React/Vue/Svelte. It identifies shared letter sequences and keeps them fixed while the rest morphs. Crossfade is the minimum fallback.
+- **Only animate what changes.** If a sentence gains or loses a word, keep the unchanged portion static.
+- **Persistent elements stay put.** If a header or component persists across a transition, it must NOT animate out and back in. Only the changing parts move.
+- **Loading states travel to their destination.** A spinner moves to where the user will look for results (e.g., after submitting a transaction, the spinner migrates to the activity tab icon).
+- **Micro-directional cues.** Chevrons, arrows, and carets animate to reflect the action. A `→` becomes `←` on back-navigation. Accordion chevrons rotate on expand.
+- **Unified interpolation.** All visual elements driven by the same data share the same easing. The line, the label, the axis, and the badge all move as one.
 
 ```jsx
 // Text morphing — use torph
 import { TextMorph } from 'torph/react';
-<TextMorph>{label}</TextMorph>  // handles shared-letter animation automatically
+<TextMorph>{label}</TextMorph>
 
 // Directional tab transitions
 const direction = newIndex > currentIndex ? 1 : -1;
@@ -100,54 +89,38 @@ const direction = newIndex > currentIndex ? 1 : -1;
 />
 ```
 
-**The golden easing curve**: `cubic-bezier(0.16, 1, 0.3, 1)` — fast start, gentle settle. Default for all entrances and morphs. Use `ease-in` (`cubic-bezier(0.4, 0, 1, 1)`) for exits only. Never use linear.
+**Default easing**: `cubic-bezier(0.16, 1, 0.3, 1)` — fast start, gentle settle. Use for all entrances and morphs. Use `cubic-bezier(0.4, 0, 1, 1)` for exits only. Never use linear.
 
-**Self-check**: Record your screen and play back at 0.5x speed. Can you follow every element's journey? Anything that teleports needs a transition.
+**Verify**: No element appears or disappears without a transition. No shared element is unmounted and remounted across states.
 
 ---
 
 ### 3. Delight — Selective Emphasis
 
-> "Mastering delight is mastering selective emphasis."
-
-**The problem**: Either zero personality (corporate slop) or everything bounces and sparkles (annoying). Both miss the point.
-
-**The principle**: The **Delight-Impact Curve** — the less frequently a feature is used, the *more* delightful it should be. Daily actions need efficiency with subtle touches. Rare moments deserve theatrical ones.
-
-```
-Delight ↑
-        |         *  (rare features: theatrical)
-        |       *
-        |     *
-        |   * *  (medium: memorable)
-        | * *
-        |* *  *  (frequent: subtle)
-        +------------------→ Feature frequency
-```
+Delight is proportional to rarity. The less frequently a feature is used, the more expressive it should be. Daily actions need efficiency with subtle polish. Rare moments deserve theatrics.
 
 **Rules**:
 
-- **Polish everything equally.** The settings page, the empty state, the error screen — all receive the same care as the hero section. One unpolished corner makes the whole feel unpolished. *"Like a fancy restaurant with a dirty bathroom."*
-- **Easter eggs reward exploration.** Hide moments in unexpected places. They create stories users share. Key: place them in features used just enough that discovery feels like reward, not annoyance.
-- **Celebrate completions.** Significant actions (backup, onboarding, first transaction) deserve confetti, a custom animation, a satisfying sound — not a green checkmark.
-- **Make destructive actions satisfying.** Deleting items? They tumble into a trash can with a sound effect. Destructive ≠ unpleasant.
-- **Animate numbers and live charts.** Values that change (prices, counts, balances) should count/flip/morph. Commas should shift position smoothly as numbers grow — never just swap. For real-time line charts, use [liveline](https://benji.org/liveline) (`npm i liveline`) — one canvas, no dependencies beyond React 18, 60fps interpolation. For 60fps value overlays, update the DOM directly rather than through React state to avoid re-render overhead.
-- **Empty states are first impressions.** An animated arrow pointing toward the create button, a floating illustration, a warm message. Never "No items yet" with nothing else.
-- **Sound design amplifies physicality.** Completion sounds, subtle interaction feedback. Sound reinforces reward and makes actions feel real.
-- **Drag-and-drop should feel satisfying.** Stacking animations, smooth reorder, visual feedback on lift. Reordering items should feel better than the result deserves.
+- **Polish every screen equally.** The settings page, the empty state, the error screen — all receive the same care as the hero. One unpolished corner makes the whole feel unpolished.
+- **Celebrate completions.** Significant actions (backup complete, onboarding done, first transaction) get confetti, a custom animation, or a sound — not just a green checkmark.
+- **Make destructive actions satisfying.** Deleted items tumble or shrink away with visual feedback. Destructive ≠ unpleasant.
+- **Animate numbers and live data.** Values that change (prices, counts, balances) should count/flip/morph. Commas shift position smoothly as numbers grow. For real-time line charts, use [liveline](https://benji.org/liveline) (`npm i liveline`) — one canvas, 60fps interpolation, no dependencies beyond React 18. For 60fps value overlays, update the DOM directly via refs rather than React state to avoid re-render overhead.
+- **Design empty states.** Use an animated arrow pointing toward the create action, a floating illustration, and a warm message. Never just render "No items yet."
+- **Easter eggs reward exploration.** Hide moments in low-frequency features where discovery feels like reward.
+- **Drag-and-drop should feel satisfying.** Stacking animations, smooth reorder, visual feedback on lift.
 
-**Delight pattern library** — concrete moments proven to work:
+**Delight calibration reference**:
 
-| Feature | Frequency | Delight Level | Pattern |
+| Feature | Frequency | Delight Level | Implementation |
 |---|---|---|---|
 | Number input | Daily | Subtle | Commas shift position as digits are typed |
 | Tab/chart navigation | Daily | Subtle | Arrow icon flips direction with value change |
 | Empty state | First visit | Medium | Animated arrow + floating illustration |
 | Item reorder | Occasional | Medium | Stacking animation + smooth drop |
-| Delete/trash | Occasional | Medium | Item tumbles into skeuomorphic trash + sound |
+| Delete/trash | Occasional | Medium | Item shrinks/tumbles away + haptic/sound |
 | First feature use | Once | High | Animated guide arrow in empty state |
-| Critical completion (backup, onboarding) | Once | Theatrical | Confetti explosion + celebratory sound |
-| Easter egg (QR, hidden gesture) | Rare | Theatrical | Ripple on tap → sequin effect on swipe |
+| Critical completion | Once | Theatrical | Confetti explosion + celebratory sound |
+| Easter egg | Rare | Theatrical | Hidden gesture triggers unique animation |
 
 ```jsx
 // Animated number with smooth comma shifting
@@ -168,7 +141,7 @@ import { Liveline } from 'liveline';
   />
 </div>
 
-// Satisfying empty state
+// Designed empty state
 function EmptyState() {
   return (
     <div className="flex flex-col items-center gap-4 py-16">
@@ -196,69 +169,68 @@ function CompletionScreen() {
 }
 ```
 
-**Self-check**: Show your UI to someone for 30 seconds. Do they smile? If not, add delight. Do they look annoyed? You over-delighted a high-frequency interaction.
+**Verify**: Every empty state has a designed layout. Completion flows have more than a static success message. No two screens have visibly different levels of polish.
 
 ---
 
-## The Taste Checklist
+## Pre-Delivery Checklist
 
-Run before considering any UI "done":
+Run through every item before considering any UI complete.
 
 ### Simplicity
-- [ ] Each screen has ONE clear primary action
-- [ ] Complex flows broken into digestible steps
-- [ ] Information revealed progressively, not all at once
-- [ ] Context preserved during transitions (overlays > navigations)
-- [ ] Stacked layers are visibly different heights
-- [ ] Every overlay has a title and dismiss action
-- [ ] User always knows where they are and how to go back
+- Each screen has exactly one visually dominant action
+- Complex flows are broken into sequential steps
+- Information is revealed progressively, not all at once
+- Context is preserved during transitions (overlays over navigations)
+- Stacked layers are visibly different heights
+- Every overlay has a title and dismiss action
+- User always knows where they are and how to go back
 
 ### Fluidity
-- [ ] Zero instant show/hide — everything animates
-- [ ] Shared elements morph between states (not unmount/remount)
-- [ ] Directional transitions match spatial logic
-- [ ] Persistent elements don't redundantly animate
-- [ ] Text changes use torph or crossfade minimum
-- [ ] Only the changing part of partial text updates animates
-- [ ] Loading states move to where results will appear
-- [ ] Micro-directional cues on chevrons and arrows
-- [ ] Elements driven by same data share the same lerp/easing (unified interpolation)
-- [ ] Default easing is `cubic-bezier(0.16, 1, 0.3, 1)`
+- Zero instant show/hide — every appearance/disappearance animates
+- Shared elements morph between states (never unmount/remount)
+- Directional transitions match spatial logic (forward = right, back = left)
+- Persistent elements do not redundantly animate during transitions
+- Text changes use torph or crossfade at minimum
+- Only the changing portion of partial text updates animates
+- Loading indicators move to where results will appear
+- Chevrons and arrows animate to reflect direction
+- Elements driven by the same data share the same easing
+- Default easing is `cubic-bezier(0.16, 1, 0.3, 1)`
 
 ### Delight
-- [ ] Frequent features have subtle micro-interactions
-- [ ] Infrequent features have memorable moments
-- [ ] Empty states are designed, not afterthoughts
-- [ ] Completions are celebrated (not just a checkmark)
-- [ ] Numbers animate when they change
-- [ ] At least one easter egg or hidden moment
-- [ ] All corners equally polished — no dirty bathrooms
-- [ ] At least one moment makes someone say "oh, that's nice"
+- Frequent features have subtle micro-interactions
+- Infrequent features have memorable moments
+- Empty states have designed layouts with illustrations and prompts
+- Completions are celebrated with animation, not just a checkmark
+- Numeric values animate when they change
+- All screens are equally polished
 
 ### General Taste
-- [ ] No generic AI aesthetics (Inter font, purple gradients, cookie-cutter layouts)
-- [ ] Typography is intentional — display + body pairing
-- [ ] Color palette has a dominant color with sharp accents
-- [ ] Spacing is generous and consistent
-- [ ] Interface feels like a physical space, not a slideshow
-- [ ] Every pixel looks placed by someone who cares
+- No generic AI aesthetics (Inter as the only font, purple/blue gradients, cookie-cutter card layouts)
+- Typography is intentional — display + body font pairing
+- Color palette has a dominant color with sharp accents
+- Spacing is generous and consistent
+- Interface feels like a physical space, not a slideshow
 
 ---
 
-## Anti-Patterns — Things That Kill Taste
+## Anti-Patterns
 
-1. **Static tab switches.** No directional slide = digital whiplash.
-2. **Modals that pop from nowhere.** Grow from trigger or slide from edge. Never just `opacity: 0 → 1` centered.
-3. **Skeleton screens that don't match the real layout.** If the skeleton has 3 bars and the content has 5 lines, you've broken the illusion.
-4. **Redundant animations.** A persistent header that fades out and back in during a page transition. Persistent = stays.
-5. **Linear easing.** Nothing in the physical world moves linearly.
-6. **"No items" empty text.** First impression. Treat it like one.
-7. **Uniform sizing in stacked layers.** Two sheets the same height = no sense of depth or progression.
-8. **Toasts for important outcomes.** Toasts = background info. Success/error/completion = inline, contextual, animated.
-9. **Forms that are just stacked inputs.** Step-by-step with transitions between them.
-10. **Buttons that don't respond to interaction.** Hover, active, and focus states. Always.
-11. **Animating unchanged text.** If only one word changes in a sentence, only that word moves.
-12. **Spinner left at origin after action.** Move it to where the user will look for the result.
+Never do these:
+
+1. **Static tab switches.** Always slide directionally.
+2. **Modals that pop from nowhere.** Grow from trigger or slide from edge. Never `opacity: 0 → 1` centered.
+3. **Skeleton screens that don't match the real layout.** The skeleton must match the actual content structure.
+4. **Redundant animations.** A persistent header must not animate out and back in during a page transition.
+5. **Linear easing.** Never use `linear` for UI transitions.
+6. **Plain "No items" text.** Every empty state must be designed.
+7. **Uniform sizing in stacked layers.** Each layer must be a different height.
+8. **Toasts for important outcomes.** Toasts are for background info only. Success/error/completion feedback must be inline, contextual, and animated.
+9. **Forms as stacked inputs.** Use step-by-step flows with transitions.
+10. **Buttons without interaction states.** Always implement hover, active, and focus states.
+11. **Animating unchanged text.** If only one word changes, only that word moves.
+12. **Spinners stuck at origin.** Move loading indicators to where the result will appear.
 
 ---
 
@@ -278,102 +250,85 @@ Run before considering any UI "done":
 
 ---
 
-## Recommended Tools
+## Recommended Libraries
 
-These libraries are built by the same people behind Family and embody the same philosophy:
+Use these before rolling your own. They are built by the same people behind Family and embody this philosophy:
 
 | Library | Purpose | Install |
 |---|---|---|
 | [torph](https://torph.lochie.me/) | Dependency-free text morphing. Handles shared-letter transitions automatically. React, Vue, Svelte. | `npm i torph` |
 | [liveline](https://benji.org/liveline) | Real-time animated line charts. One canvas, 60fps lerp, momentum arrows, no dependencies beyond React 18. | `npm i liveline` |
 
-When building anything with text that changes or live numeric/chart data, reach for these before rolling your own.
-
----
-
-## How to Use This Skill
-
-1. **Read this before every UI task.** Not after. Before.
-2. **Apply pillars in order.** Simplicity → Fluidity → Delight. You can't polish a bad layout with animations.
-3. **Run the checklist** before delivering.
-4. **Pair with `frontend-design` skill** for visual aesthetics (typography, color, layout). `ui-craft` handles *feel* and *interaction quality*.
-5. **When in doubt, animate.** Easier to tone down than to add life to a dead interface.
-6. **Record and review at 0.5x.** Slow motion reveals every teleport, every jarring cut, every missed opportunity.
-
-The goal is not to make something that "works." The goal is to make something that someone uses and thinks: *"Whoever made this actually gives a shit."*
-
-That's taste.
-
 ---
 
 ## Implementation Checklist (Rauno Freiberg)
 
-Concrete CSS, accessibility, and interaction details. Run through these before shipping.
+Concrete CSS, accessibility, and interaction details. Apply these to every UI.
 
 ### Interactivity
-- Clicking an input label should focus the input
-- Wrap inputs in `<form>` so Enter submits
-- Use appropriate input `type` (`password`, `email`, etc.)
-- Disable `spellcheck` and `autocomplete` on most inputs
-- Use `required` attribute for HTML form validation
-- Icon/prefix decorations: absolutely positioned with padding, not beside the input
+- Clicking an input label focuses the input
+- Inputs are wrapped in `<form>` so Enter submits
+- Inputs use the appropriate `type` (`password`, `email`, etc.)
+- `spellcheck` and `autocomplete` are disabled on most inputs
+- `required` attribute is used for HTML form validation
+- Icon/prefix decorations are absolutely positioned with padding, not placed beside the input
 - Toggles take effect immediately — no confirmation step
-- Disable buttons after submission to prevent duplicate requests
-- Interactive elements: set `user-select: none` on inner content
-- Decorative elements (glows, gradients): set `pointer-events: none`
-- List items: no dead zones — use padding, not gaps, between elements
+- Buttons are disabled after submission to prevent duplicate requests
+- Interactive elements have `user-select: none` on inner content
+- Decorative elements (glows, gradients) have `pointer-events: none`
+- List items have no dead zones — use padding between elements, not gaps
 
 ### Typography
 - `-webkit-font-smoothing: antialiased` on all text
 - `text-rendering: optimizeLegibility` on all text
-- Subset fonts to the content's alphabet/language
-- Never change font weight on hover (causes layout shift)
-- Never use font weights below 400
-- Mid-size headings: weight 500–600
-- Fluid sizing: `clamp(48px, 5vw, 72px)` for headings
-- Use `font-variant-numeric: tabular-nums` for numbers in tables/timers
-- `-webkit-text-size-adjust: 100%` to prevent iOS landscape resizing
+- Fonts are subsetted to the content's alphabet/language
+- Font weight never changes on hover (causes layout shift)
+- No font weights below 400
+- Mid-size headings use weight 500–600
+- Headings use fluid sizing: `clamp(48px, 5vw, 72px)`
+- Numbers in tables/timers use `font-variant-numeric: tabular-nums`
+- `-webkit-text-size-adjust: 100%` is set to prevent iOS landscape resizing
 
 ### Motion
-- Theme switches: disable transitions temporarily (use `next-themes` in Next.js)
-- Interaction animations: max 200ms to feel immediate
-- Scale proportionally to trigger size: dialogs from ~0.8 not 0; buttons press to ~0.96 not 0.8
-- High-frequency / low-novelty actions: skip animation (right-click menus, list add/delete)
-- Pause looping animations when off-screen (`IntersectionObserver`)
-- In-page anchor scrolling: `scroll-behavior: smooth` with offset
+- Theme switches disable transitions temporarily (use `next-themes` in Next.js)
+- Interaction animations are max 200ms
+- Scale is proportional to trigger size: dialogs from ~0.8 not 0; buttons press to ~0.96 not 0.8
+- High-frequency / low-novelty actions skip animation (right-click menus, list add/delete)
+- Looping animations pause when off-screen (`IntersectionObserver`)
+- In-page anchor scrolling uses `scroll-behavior: smooth` with offset
 
 ### Touch
-- Hover states: wrap in `@media (hover: hover)` — don't flash on tap
-- Input font size: minimum 16px (prevents iOS zoom on focus)
-- Don't autofocus inputs on touch (keyboard covers screen)
-- `<video>`: always add `muted` and `playsinline` for iOS autoplay
-- Custom pan/zoom: disable `touch-action` to prevent native interference
-- Replace default iOS tap highlight: `-webkit-tap-highlight-color: rgba(0,0,0,0)` + custom alternative
+- Hover states are wrapped in `@media (hover: hover)` — no flash on tap
+- Input font size is minimum 16px (prevents iOS zoom on focus)
+- Inputs are not autofocused on touch devices (keyboard covers screen)
+- `<video>` elements always have `muted` and `playsinline` for iOS autoplay
+- Custom pan/zoom disables `touch-action` to prevent native interference
+- Default iOS tap highlight is replaced: `-webkit-tap-highlight-color: rgba(0,0,0,0)` + custom alternative
 
 ### Performance
-- Large `blur()` values are slow — use sparingly
-- Scaling + blurring filled rectangles causes banding — use radial gradients
-- `transform: translateZ(0)` sparingly to push to GPU
-- `will-change`: last resort only — pre-emptive use can hurt performance
-- Pause/unmount off-screen autoplaying videos on iOS
-- Use refs + direct DOM manipulation for real-time values (avoid React re-renders on every scroll/wheel event)
+- Large `blur()` values are used sparingly — they are slow
+- Scaling + blurring filled rectangles uses radial gradients to avoid banding
+- `transform: translateZ(0)` is used sparingly to push to GPU
+- `will-change` is a last resort only — pre-emptive use can hurt performance
+- Off-screen autoplaying videos on iOS are paused/unmounted
+- Real-time values use refs + direct DOM manipulation, not React state on every scroll/wheel event
 
 ### Accessibility
-- Disabled buttons: no tooltips (not in tab order, never announced)
-- Focus rings: `box-shadow` not `outline` (respects border-radius)
-- Sequential lists: navigable with `↑`/`↓`, deletable with `⌘ Backspace`
-- Dropdown menus: trigger on `mousedown` not `click` for instant open
-- SVG favicon: use `prefers-color-scheme` in a style tag
-- Icon-only buttons: explicit `aria-label`
-- Hover tooltips: no interactive content inside
-- Images: always `<img>` not CSS backgrounds (screen readers + right-click)
-- HTML illustrations: explicit `aria-label` on wrapper
-- Gradient text: unset gradient on `::selection`
-- Nested menus: implement a "prediction cone" to prevent accidental close
+- Disabled buttons have no tooltips (not in tab order, never announced)
+- Focus rings use `box-shadow` not `outline` (respects border-radius)
+- Sequential lists are navigable with `↑`/`↓`, deletable with `⌘ Backspace`
+- Dropdown menus trigger on `mousedown` not `click` for instant open
+- SVG favicons use `prefers-color-scheme` in a style tag
+- Icon-only buttons have an explicit `aria-label`
+- Hover tooltips contain no interactive content
+- Images use `<img>` not CSS backgrounds (screen readers + right-click)
+- HTML illustrations have an explicit `aria-label` on the wrapper
+- Gradient text unsets the gradient on `::selection`
+- Nested menus implement a "prediction cone" to prevent accidental close
 
 ### Design Details
-- Optimistic updates locally, roll back with feedback on error
-- Auth redirects: server-side before client loads (no janky URL flash)
-- Style `::selection` across the document
-- Feedback relative to trigger: inline checkmark on copy, not a toast; highlight input on error
-- Empty states: prompt to create, with optional templates
+- Updates are optimistic locally, rolled back with feedback on error
+- Auth redirects happen server-side before the client loads (no URL flash)
+- `::selection` is styled across the document
+- Feedback is relative to the trigger: inline checkmark on copy (not a toast), highlight on input error
+- Empty states prompt creation with optional templates
