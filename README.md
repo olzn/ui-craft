@@ -1,6 +1,6 @@
 # UI Craft
 
-A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skill for building polished, intentional web interfaces.
+A skill for building polished, intentional web interfaces. Works with any AI coding agent that supports markdown skills.
 
 Encodes the "Family Values" design philosophy — Simplicity, Fluidity, and Delight — alongside a concrete implementation checklist for CSS details, accessibility, touch, and performance.
 
