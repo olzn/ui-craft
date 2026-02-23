@@ -1,20 +1,10 @@
-# Rauno Design Skills
+# UI Craft
 
-[Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills for building polished web interfaces, based on the work of [Rauno Freiberg](https://rauno.me).
+A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skill for building polished, intentional web interfaces.
 
-## Skills
+Encodes the "Family Values" design philosophy — Simplicity, Fluidity, and Delight — alongside a concrete implementation checklist for CSS details, accessibility, touch, and performance.
 
-### `web-interface-guidelines`
-
-A practical checklist for web interface details — interactivity, typography, motion, touch, performance, accessibility, and design patterns.
-
-Based on [github.com/raunofreiberg/interfaces](https://github.com/raunofreiberg/interfaces).
-
-### `interaction-design-principles`
-
-Conceptual principles for understanding why great interactions work — metaphors, gesture thresholds, kinetic physics, spatial consistency, and animation trade-offs.
-
-Based on [Invisible Details of Interaction Design](https://rauno.me/craft/interaction-design).
+Based on the work of [Benji Taylor](https://benji.org/family-values) and [Rauno Freiberg](https://rauno.me).
 
 ## Installation
 
@@ -23,32 +13,34 @@ Based on [Invisible Details of Interaction Design](https://rauno.me/craft/intera
 From your project's root directory:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/olzn/rauno-design-skills/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/olzn/ui-craft/main/install.sh | sh
 ```
 
 Or clone and run locally:
 
 ```sh
-git clone https://github.com/olzn/rauno-design-skills.git
-cd rauno-design-skills
+git clone https://github.com/olzn/ui-craft.git
+cd ui-craft
 sh install.sh
 ```
 
 ### Option B: Manual
 
-Download the skill files directly into your project's `.claude/skills/` directory:
+Download the skill file directly into your project's `.claude/skills/` directory:
 
 ```sh
 mkdir -p .claude/skills
-curl -fsSL https://raw.githubusercontent.com/olzn/rauno-design-skills/main/interaction-design-principles.md -o .claude/skills/interaction-design-principles.md
-curl -fsSL https://raw.githubusercontent.com/olzn/rauno-design-skills/main/web-interface-guidelines.md -o .claude/skills/web-interface-guidelines.md
+curl -fsSL https://raw.githubusercontent.com/olzn/ui-craft/main/ui-craft.md -o .claude/skills/ui-craft.md
 ```
 
 ## Attribution
 
-These skills are distilled from the work of [Rauno Freiberg](https://rauno.me). All original ideas, principles, and guidelines belong to him. This repo simply packages his insights as Claude Code skills for easy use.
+This skill is distilled from:
 
-- [interfaces](https://github.com/raunofreiberg/interfaces) — the original web interface guidelines repo
-- [Invisible Details of Interaction Design](https://rauno.me/craft/interaction-design) — the original essay on interaction design
+- [Family Values](https://benji.org/family-values) by Benji Taylor — the design philosophy behind [Family](https://family.co)
+- [interfaces](https://github.com/raunofreiberg/interfaces) by Rauno Freiberg — the original web interface guidelines
+- [Invisible Details of Interaction Design](https://rauno.me/craft/interaction-design) by Rauno Freiberg — interaction design principles
 
-> **Note:** The original [interfaces](https://github.com/raunofreiberg/interfaces) repo does not specify a license. These skills are shared in good faith for educational purposes with full attribution. If you are the original author and have concerns, please open an issue.
+All original ideas, principles, and guidelines belong to their respective authors. This repo packages their insights as a Claude Code skill for easy use.
+
+> **Note:** The original [interfaces](https://github.com/raunofreiberg/interfaces) repo does not specify a license. This skill is shared in good faith for educational purposes with full attribution. If you are an original author and have concerns, please open an issue.
