@@ -250,13 +250,15 @@ Never do these:
 
 ## Recommended Libraries
 
-Use these before rolling your own. They are built by the same people behind Family and embody this philosophy:
+Use these before rolling your own:
 
 | Library | Purpose | Install |
 |---|---|---|
 | [number-flow](https://number-flow.barvian.me) | Animated number transitions. Dependency-free, accessible, handles formatting and locale via `Intl.NumberFormat`. React, Vue, Svelte. | `npm i @number-flow/react` |
 | [torph](https://torph.lochie.me/) | Dependency-free text morphing. Handles shared-letter transitions automatically. React, Vue, Svelte. | `npm i torph` |
 | [liveline](https://benji.org/liveline) | Real-time animated line charts. One canvas, 60fps lerp, momentum arrows, no dependencies beyond React 18. | `npm i liveline` |
+| [vaul](https://vaul.emilkowal.ski) | Drawer/tray component for React. Handles touch gestures, snap points, nested drawers, and variable heights. Use for all sheet/tray patterns in the Simplicity pillar. | `npm i vaul` |
+| [sonner](https://sonner.emilkowal.ski) | Toast notifications for React. Use only for background info — never for success/error/completion feedback (see Anti-Patterns). | `npm i sonner` |
 
 ---
 
