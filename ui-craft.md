@@ -104,7 +104,7 @@ Delight is proportional to rarity. The less frequently a feature is used, the mo
 - **Polish every screen equally.** The settings page, the empty state, the error screen — all receive the same care as the hero. One unpolished corner makes the whole feel unpolished.
 - **Celebrate completions.** Significant actions (backup complete, onboarding done, first transaction) get confetti, a custom animation, or a sound — not just a green checkmark.
 - **Make destructive actions satisfying.** Deleted items tumble or shrink away with visual feedback. Destructive ≠ unpleasant.
-- **Animate numbers and live data.** Values that change (prices, counts, balances) should count/flip/morph. Commas shift position smoothly as numbers grow. For real-time line charts, use [liveline](https://benji.org/liveline) (`npm i liveline`) — one canvas, 60fps interpolation, no dependencies beyond React 18. For 60fps value overlays, update the DOM directly via refs rather than React state to avoid re-render overhead.
+- **Animate numbers and live data.** Values that change (prices, counts, balances) should count/flip/morph. Use [number-flow](https://number-flow.barvian.me) (`npm i @number-flow/react`) — dependency-free, accessible, handles formatting and locale via `Intl.NumberFormat`. For real-time line charts, use [liveline](https://benji.org/liveline) (`npm i liveline`) — one canvas, 60fps interpolation, no dependencies beyond React 18.
 - **Design empty states.** Use an animated arrow pointing toward the create action, a floating illustration, and a warm message. Never just render "No items yet."
 - **Easter eggs reward exploration.** Hide moments in low-frequency features where discovery feels like reward.
 - **Drag-and-drop should feel satisfying.** Stacking animations, smooth reorder, visual feedback on lift.
@@ -123,11 +123,9 @@ Delight is proportional to rarity. The less frequently a feature is used, the mo
 | Easter egg | Rare | Theatrical | Hidden gesture triggers unique animation |
 
 ```jsx
-// Animated number with smooth comma shifting
-function AnimatedNumber({ value }) {
-  const spring = useSpring(value, { stiffness: 80, damping: 20 });
-  return <motion.span>{useTransform(spring, v => Math.round(v).toLocaleString())}</motion.span>;
-}
+// Animated number — use number-flow
+import NumberFlow from '@number-flow/react';
+<NumberFlow value={totalPrice} format={{ style: 'currency', currency: 'USD' }} />
 
 // Real-time chart — liveline handles interpolation, momentum arrows, scrub, theming
 import { Liveline } from 'liveline';
@@ -256,6 +254,7 @@ Use these before rolling your own. They are built by the same people behind Fami
 
 | Library | Purpose | Install |
 |---|---|---|
+| [number-flow](https://number-flow.barvian.me) | Animated number transitions. Dependency-free, accessible, handles formatting and locale via `Intl.NumberFormat`. React, Vue, Svelte. | `npm i @number-flow/react` |
 | [torph](https://torph.lochie.me/) | Dependency-free text morphing. Handles shared-letter transitions automatically. React, Vue, Svelte. | `npm i torph` |
 | [liveline](https://benji.org/liveline) | Real-time animated line charts. One canvas, 60fps lerp, momentum arrows, no dependencies beyond React 18. | `npm i liveline` |
 
