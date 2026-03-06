@@ -19,7 +19,7 @@ Based on the work of [Benji Taylor](https://benji.org/family-values), [Rauno Fre
 - **Static content sites** (docs, blogs, marketing). Most motion rules don't apply and the skill will push transitions where none are needed.
 - **Data-dense dashboards**. "One primary action per view" conflicts with interfaces where showing 40 data points simultaneously is the point.
 - **Quick prototypes**. The checklists demand polish (reduced motion fallbacks, shadow stacks, tabular-nums) that's premature when validating an idea.
-- **Design system primitives**. The skill is opinionated about specific implementations (vaul for drawers, torph for text) rather than composable abstractions. See [system-craft](https://github.com/olzn/system-craft) for token architecture and component API patterns.
+- **Design system primitives**. The skill is opinionated about specific implementations (vaul for drawers, torph for text) rather than composable abstractions.
 
 The Rauno Freiberg checklist (CSS, accessibility, touch, performance) is the most universally useful part — it improves any frontend regardless of product type. The Three Pillars are the most domain-specific — they encode a design language for mobile-first interactive apps.
 
@@ -49,10 +49,6 @@ Download the skill file directly into your project's `.claude/skills/` directory
 mkdir -p .claude/skills
 curl -fsSL https://raw.githubusercontent.com/olzn/ui-craft/main/ui-craft.md -o .claude/skills/ui-craft.md
 ```
-
-## See also
-
-- **[system-craft](https://github.com/olzn/system-craft)** — Companion skill for design system architecture. Token layers, component API conventions, variant systems, composition patterns. Where ui-craft is taste, system-craft is architecture.
 
 ## Attribution
 
