@@ -58,7 +58,7 @@ This skill is distilled from:
 - [interfaces](https://github.com/raunofreiberg/interfaces) by Rauno Freiberg — the original web interface guidelines
 - [Invisible Details of Interaction Design](https://rauno.me/craft/interaction-design) by Rauno Freiberg — interaction design principles
 - [Emil Kowalski's essays](https://emilkowal.ski) — practical animation knowledge (duration rules, easing, transform best practices, accessibility)
-- Derek Briggs — multi-layer shadow stack technique
+- [Derek Briggs](https://x.com/PixelJanitor/status/1735758919509684360) — multi-layer shadow stack technique
 
 All original ideas, principles, and guidelines belong to their respective authors. This repo packages their insights as a Claude Code skill for easy use.
 
