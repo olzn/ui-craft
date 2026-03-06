@@ -4,7 +4,24 @@ A skill for building polished, intentional web interfaces. Works with any AI cod
 
 Encodes the "Family Values" design philosophy — Simplicity, Fluidity, and Delight — alongside a concrete implementation checklist for CSS details, accessibility, touch, and performance.
 
-Based on the work of [Benji Taylor](https://benji.org/family-values) and [Rauno Freiberg](https://rauno.me).
+Based on the work of [Benji Taylor](https://benji.org/family-values), [Rauno Freiberg](https://rauno.me), and [Emil Kowalski](https://emilkowal.ski).
+
+## When to use
+
+**Best for** consumer-facing interactive apps where the feel is a differentiator — fintech, creative tools, social products, onboarding flows. Strongest when building:
+
+- Multi-step flows with overlays and transitions
+- Components that respond to interaction with physical feedback (press, drag, expand)
+- Screens where numbers, labels, or states change and need to animate between values
+
+**Less useful for:**
+
+- **Static content sites** (docs, blogs, marketing). Most motion rules don't apply and the skill will push transitions where none are needed.
+- **Data-dense dashboards**. "One primary action per view" conflicts with interfaces where showing 40 data points simultaneously is the point.
+- **Quick prototypes**. The checklists demand polish (reduced motion fallbacks, shadow stacks, tabular-nums) that's premature when validating an idea.
+- **Design system primitives**. The skill is opinionated about specific implementations (vaul for drawers, torph for text) rather than composable abstractions.
+
+The Rauno Freiberg checklist (CSS, accessibility, touch, performance) is the most universally useful part — it improves any frontend regardless of product type. The Three Pillars are the most domain-specific — they encode a design language for mobile-first interactive apps.
 
 ## Installation
 
@@ -40,6 +57,8 @@ This skill is distilled from:
 - [Family Values](https://benji.org/family-values) by Benji Taylor — the design philosophy behind [Family](https://family.co)
 - [interfaces](https://github.com/raunofreiberg/interfaces) by Rauno Freiberg — the original web interface guidelines
 - [Invisible Details of Interaction Design](https://rauno.me/craft/interaction-design) by Rauno Freiberg — interaction design principles
+- [Emil Kowalski's essays](https://emilkowal.ski) — practical animation knowledge (duration rules, easing, transform best practices, accessibility)
+- Derek Briggs — multi-layer shadow stack technique
 
 All original ideas, principles, and guidelines belong to their respective authors. This repo packages their insights as a Claude Code skill for easy use.
 
