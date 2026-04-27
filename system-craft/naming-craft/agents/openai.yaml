@@ -1,0 +1,4 @@
+interface:
+  display_name: "Naming Craft"
+  short_description: "Name interface and design-system concepts consistently."
+  default_prompt: "Use $naming-craft to evaluate names, labels, terminology, and taxonomy across UI, design-system, and product surfaces."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Detail Craft"
+  short_description: "Platform details and interface polish."
+  default_prompt: "Use $detail-craft to catch browser quirks, input details, touch issues, focus handling, performance micro-details, and visual polish."

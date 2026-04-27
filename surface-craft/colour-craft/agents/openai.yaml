@@ -1,0 +1,4 @@
+interface:
+  display_name: "Colour Craft"
+  short_description: "Accessible colour systems and theme mapping."
+  default_prompt: "Use $colour-craft to create or review palettes, semantic colours, contrast, dark mode, colour blindness, and OKLCH scales."

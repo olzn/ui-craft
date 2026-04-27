@@ -1,0 +1,4 @@
+interface:
+  display_name: "Type Craft"
+  short_description: "Typography systems for web interfaces."
+  default_prompt: "Use $type-craft to build or review type scales, font loading, OpenType features, rhythm, wrapping, and text rendering."
