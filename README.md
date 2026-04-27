@@ -60,6 +60,93 @@ Each skill folder contains a `SKILL.md`. Some skills also include:
 
 ---
 
+## When To Use UI Craft
+
+Use UI Craft when an agent is building, reviewing, or refactoring web interface work where quality depends on design judgement as much as code correctness.
+
+Good fits:
+
+- Building a new app screen, product feature, settings page, dashboard, form, table, command menu, modal, or navigation structure.
+- Creating or auditing a design system, token architecture, component library, or shared UI vocabulary.
+- Reviewing frontend work for visual polish, accessibility, motion, interaction behaviour, naming consistency, and production readiness.
+- Turning a rough implementation into something coherent, usable, and shippable.
+- Debugging browser-specific interface problems such as iOS input zoom, sticky hover, scroll lock, focus return, layout shift, or animation jank.
+
+Poor fits:
+
+- Backend-only work with no user interface.
+- Pure data modelling, infrastructure, deployment, or API design.
+- Brand strategy, marketing naming, or product positioning without an interface or design-system surface.
+- Native mobile interface work where web platform rules do not apply.
+
+---
+
+## Best Practices
+
+Use the narrowest relevant skill first. If you need a button API, start with `component-craft`, not the whole suite. If you need the button label, use `naming-craft`. If the button feels visually off, use `detail-craft` or `motion-craft`.
+
+Start with structure, then refine the surface. For new work, the usual order is:
+
+```text
+naming-craft -> token-craft -> component-craft -> pattern-craft -> surface-craft skills
+```
+
+For existing UI, reverse the order when the structure already exists:
+
+```text
+detail-craft -> motion-craft -> type-craft -> colour-craft -> component-craft
+```
+
+Do not invoke every skill by default. The suite works best when the lead skill is clear and supporting skills are pulled in only for their specific domain.
+
+Use `surface-craft/composition.md` for multi-skill tasks. It defines common sequences for new project setup, component work, page work, audits, accessibility reviews, and visual polish passes.
+
+Keep `learnings.md` useful. When a project-specific browser quirk, library behaviour, or implementation edge case appears, add a short finding to the relevant skill's `learnings.md` so the suite improves through use.
+
+Treat references as optional depth. The `references/` files are for detailed recipes and audits, not material that needs to be loaded for every task.
+
+---
+
+## Skill Selection
+
+| Task | Lead skill | Also check |
+|---|---|---|
+| Name a feature, command, button, token, or component | `naming-craft` | Relevant domain skill |
+| Define spacing, colour semantics, radius, shadow, or theme mappings | `token-craft` | `colour-craft`, `type-craft` |
+| Build a reusable component | `component-craft` | `naming-craft`, `token-craft`, `detail-craft` |
+| Design a form, table, navigation, feedback system, or page layout | `pattern-craft` | `component-craft`, `detail-craft` |
+| Decide whether something should animate or how a gesture should behave | `interaction-craft` | `motion-craft` |
+| Implement easing, timing, transitions, entrances, exits, or icon swaps | `motion-craft` | `interaction-craft`, `detail-craft` |
+| Set up type scale, font loading, wrapping, rhythm, or OpenType features | `type-craft` | `token-craft` |
+| Build palettes, contrast, dark mode, or colour-blind-safe states | `colour-craft` | `token-craft` |
+| Polish browser details, focus, touch, inputs, scroll, or visual finish | `detail-craft` | `motion-craft`, `accessibility.md` |
+
+---
+
+## Prompt Examples
+
+```text
+Use $pattern-craft and $component-craft to design a billing settings form with validation, loading, error, and empty states.
+```
+
+```text
+Use $naming-craft to audit these component, token, and Figma layer names for consistency.
+```
+
+```text
+Use $interaction-craft first, then $motion-craft, to decide and implement the behaviour for this swipe-to-dismiss card.
+```
+
+```text
+Use $detail-craft to review this modal for focus return, scroll lock, touch behaviour, safe areas, and visual polish.
+```
+
+```text
+Use $token-craft and $colour-craft to define semantic colour tokens for light and dark themes with accessible contrast.
+```
+
+---
+
 ## Installation
 
 Install globally for Codex:
