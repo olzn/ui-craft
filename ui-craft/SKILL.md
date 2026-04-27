@@ -38,6 +38,7 @@ Keep learnings useful. When a reusable project quirk or library behaviour appear
 | Task | Lead skill | Also check |
 |---|---|---|
 | Name a feature, command, button, token, or component | `naming-craft` | Relevant domain skill |
+| Write or revise explanatory UX text | `ux-copy` if available | `naming-craft` for terms |
 | Define spacing, radius, shadow, z-index, breakpoints, or theme mappings | `token-craft` | `colour-craft`, `type-craft` |
 | Build a reusable component | `component-craft` | `naming-craft`, `token-craft`, `detail-craft` |
 | Design a form, table, navigation, feedback system, or page layout | `pattern-craft` | `component-craft`, `detail-craft` |
@@ -83,6 +84,14 @@ If multiple skills apply, keep the sequence explicit and short. Example:
 ```text
 Lead with pattern-craft for form structure, then component-craft for field/button APIs, then detail-craft for focus and mobile input behaviour.
 ```
+
+### Boundary With ux-copy
+
+If `ux-copy` is available, use it for explanatory and persuasive interface writing: error message bodies, empty state body text, onboarding text, tooltip wording, loading copy, and marketing-style CTAs.
+
+Use `naming-craft` for product action labels and terminology: button labels, command names, menu items, confirmation action labels, feature names, component names, token names, and any wording that must stay consistent across UI, code, Figma, docs, analytics, or a glossary.
+
+For full flows, sequence them: `naming-craft` establishes the vocabulary and action labels; `ux-copy` writes the surrounding explanatory copy and tone variants.
 
 ---
 

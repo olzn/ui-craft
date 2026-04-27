@@ -120,6 +120,7 @@ Treat references as optional depth. The `references/` files are for detailed rec
 | Task | Lead skill | Also check |
 |---|---|---|
 | Name a feature, command, button, token, or component | `naming-craft` | Relevant domain skill |
+| Write or revise explanatory UX text | `ux-copy` if available | `naming-craft` for terms |
 | Define spacing, colour semantics, radius, shadow, or theme mappings | `token-craft` | `colour-craft`, `type-craft` |
 | Build a reusable component | `component-craft` | `naming-craft`, `token-craft`, `detail-craft` |
 | Design a form, table, navigation, feedback system, or page layout | `pattern-craft` | `component-craft`, `detail-craft` |
@@ -152,6 +153,8 @@ Use $detail-craft to review this modal for focus return, scroll lock, touch beha
 ```text
 Use $token-craft and $colour-craft to define semantic colour tokens for light and dark themes with accessible contrast.
 ```
+
+When `ux-copy` is installed, use it for explanatory or persuasive writing such as error message bodies, empty states, onboarding, tooltips, loading copy, and marketing-style CTAs. Use `naming-craft` for product action labels, commands, feature names, UI terminology, and copy that must stay consistent across code, Figma, docs, analytics, or a glossary.
 
 ---
 
