@@ -11,7 +11,7 @@ Based on [NN/g UI copy](https://www.nngroup.com/articles/ui-copy/), [Shopify Pol
 
 Use `references/taxonomy.md` when auditing many names, mapping Figma names to code names, or choosing terms across several domains at once.
 
-If `ux-copy` is available, keep the boundary clear: this skill owns product action labels, command names, terminology systems, and cross-surface consistency. `ux-copy` owns explanatory or persuasive wording such as error message bodies, empty state body text, onboarding text, tooltip prose, loading copy, and marketing-style CTAs. For a full flow, establish names here first, then use `ux-copy` for surrounding copy and tone.
+Keep the boundary with copy-craft clear: this skill owns product action labels, command names, terminology systems, and cross-surface consistency. copy-craft owns explanatory or persuasive wording such as error message bodies, empty state body text, onboarding text, tooltip prose, loading copy, and marketing-style CTAs. For a full flow, establish names here first, then use copy-craft for surrounding copy and tone.
 
 ---
 

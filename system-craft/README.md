@@ -4,7 +4,7 @@ Codex and Claude Code skills for structuring design systems, naming, component l
 
 Four focused skills covering the full arc from naming and foundation tokens through individual components to assembled features. Each skill owns a single layer of the design system stack.
 
-Companion to surface-craft, which covers motion, interaction design, typography, colour, and platform implementation. Both suites live in the [ui-craft](https://github.com/olzn/ui-craft) repo.
+Companion to surface-craft, which covers copy, motion, interaction design, typography, colour, and platform implementation. Both suites live in the [ui-craft](https://github.com/olzn/ui-craft) repo.
 
 ---
 
@@ -12,9 +12,9 @@ Companion to surface-craft, which covers motion, interaction design, typography,
 
 **system-craft defines what the interface is made from and how those parts are named, structured, and reused.** It is the structural design-system layer: vocabulary, tokens, component contracts, and composed patterns.
 
-Use **surface-craft** when deciding how those parts look, move, respond, and feel in use: typography, colour, motion, interaction behaviour, browser details, and visual polish.
+Use **surface-craft** when deciding how those parts look, read, move, respond, and feel in use: typography, copy, colour, motion, interaction behaviour, browser details, and visual polish.
 
-Rule of thumb: if the question is "what is this thing, what is it called, and how does it fit into the reusable system?", start with system-craft. If the question is "how should this render, feel, move, or behave in the browser?", use surface-craft.
+Rule of thumb: if the question is "what is this thing, what is it called, and how does it fit into the reusable system?", start with system-craft. If the question is "how should this render, read, feel, move, or behave in the browser?", use surface-craft.
 
 ---
 
@@ -28,7 +28,7 @@ system-craft/
 └── pattern-craft/SKILL.md     Composite UI patterns.
 ```
 
-For cross-suite references, see surface-craft's `accessibility.md` (accessibility requirements across all nine skills) and `composition.md` (multi-skill task sequencing and lead-skill lookup).
+For cross-suite references, see surface-craft's `accessibility.md` (accessibility requirements across all ten domain skills) and `composition.md` (multi-skill task sequencing and lead-skill lookup).
 
 ### token-craft
 
@@ -106,7 +106,7 @@ TARGET_DIR=.claude/skills sh install.sh
 
 ## Companion: surface-craft
 
-The visual and interaction counterpart to this suite. Covers motion, interaction design, typography, colour, and platform implementation details.
+The visual, copy, and interaction counterpart to this suite. Covers motion, interaction design, typography, copy, colour, and platform implementation details.
 
 **[github.com/olzn/ui-craft/tree/main/surface-craft](https://github.com/olzn/ui-craft/tree/main/surface-craft)**
 

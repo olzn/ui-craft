@@ -1,13 +1,13 @@
 ---
 name: ui-craft
-description: Coordinate the UI Craft skill suite. Use when a user asks for broad UI design, frontend quality, design-system work, interface review, visual polish, or when it is unclear which craft skill should lead. Routes work across naming, tokens, components, patterns, motion, interaction, typography, colour, and detail. Use for "make this UI better", "review this interface", "improve this design system", "which craft skill applies", or multi-skill UI tasks. This is a coordinator, not a replacement for the focused domain skills.
+description: Coordinate the UI Craft skill suite. Use when a user asks for broad UI design, frontend quality, design-system work, interface review, visual polish, UX writing, or when it is unclear which craft skill should lead. Routes work across naming, tokens, components, patterns, copy, motion, interaction, typography, colour, and detail. Use for "make this UI better", "review this interface", "improve this design system", "which craft skill applies", or multi-skill UI tasks. This is a coordinator, not a replacement for the focused domain skills.
 ---
 
 # UI Craft
 
 Agent-facing routing and usage guidance for the UI Craft suite.
 
-This is a coordinator skill. It does not replace the nine domain skills. Use it to decide which skill should lead, which supporting skills to check, and how much guidance to load.
+This is a coordinator skill. It does not replace the ten domain skills. Use it to decide which skill should lead, which supporting skills to check, and how much guidance to load.
 
 ---
 
@@ -18,13 +18,13 @@ Use the narrowest relevant skill first. Do not load or apply every craft skill b
 For new systems or new features, start with structure before surface:
 
 ```text
-naming-craft -> token-craft -> component-craft -> pattern-craft -> surface skills
+naming-craft -> token-craft -> component-craft -> pattern-craft -> copy-craft -> surface skills
 ```
 
 For existing UI polish, start with the surface:
 
 ```text
-detail-craft -> motion-craft -> type-craft -> colour-craft -> component-craft
+detail-craft -> copy-craft -> motion-craft -> type-craft -> colour-craft -> component-craft
 ```
 
 Use references only when needed. `references/` files contain deeper recipes and audits; they are not required for every task.
@@ -38,7 +38,7 @@ Keep learnings useful. When a reusable project quirk or library behaviour appear
 | Task | Lead skill | Also check |
 |---|---|---|
 | Name a feature, command, button, token, or component | `naming-craft` | Relevant domain skill |
-| Write or revise explanatory UX text | `ux-copy` if available | `naming-craft` for terms |
+| Write or revise explanatory UX text | `copy-craft` | `naming-craft` for terms |
 | Define spacing, radius, shadow, z-index, breakpoints, or theme mappings | `token-craft` | `colour-craft`, `type-craft` |
 | Build a reusable component | `component-craft` | `naming-craft`, `token-craft`, `detail-craft` |
 | Design a form, table, navigation, feedback system, or page layout | `pattern-craft` | `component-craft`, `detail-craft` |
@@ -85,13 +85,13 @@ If multiple skills apply, keep the sequence explicit and short. Example:
 Lead with pattern-craft for form structure, then component-craft for field/button APIs, then detail-craft for focus and mobile input behaviour.
 ```
 
-### Boundary With ux-copy
+### Boundary With copy-craft
 
-If `ux-copy` is available, use it for explanatory and persuasive interface writing: error message bodies, empty state body text, onboarding text, tooltip wording, loading copy, and marketing-style CTAs.
+Use `copy-craft` for explanatory and persuasive interface writing: error message bodies, empty state body text, onboarding text, tooltip wording, loading copy, and marketing-style CTAs.
 
 Use `naming-craft` for product action labels and terminology: button labels, command names, menu items, confirmation action labels, feature names, component names, token names, and any wording that must stay consistent across UI, code, Figma, docs, analytics, or a glossary.
 
-For full flows, sequence them: `naming-craft` establishes the vocabulary and action labels; `ux-copy` writes the surrounding explanatory copy and tone variants.
+For full flows, sequence them: `naming-craft` establishes the vocabulary and action labels; `copy-craft` writes the surrounding explanatory copy and tone variants.
 
 ---
 
@@ -102,6 +102,8 @@ For full flows, sequence them: `naming-craft` establishes the vocabulary and act
 **"Build a reusable Button"**: `component-craft` lead; check `naming-craft`, `token-craft`, `motion-craft`, and `detail-craft`.
 
 **"Design this settings page"**: `pattern-craft` lead; check `component-craft`, `naming-craft`, and `detail-craft`.
+
+**"This copy feels unclear"**: `copy-craft` lead; check `naming-craft` for established terms.
 
 **"This animation feels wrong"**: `motion-craft` lead; check `interaction-craft` for whether the motion logic is right.
 

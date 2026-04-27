@@ -2,7 +2,7 @@
 
 Codex and Claude Code skills for the experiential surface of web interfaces.
 
-Five focused skills and a shared design philosophy covering motion, interaction design, typography, colour, and platform implementation. Each skill owns a single domain completely, triggering only when its expertise is needed.
+Six focused skills and a shared design philosophy covering motion, interaction design, typography, copy, colour, and platform implementation. Each skill owns a single domain completely, triggering only when its expertise is needed.
 
 Companion to system-craft, which covers naming, tokens, component architecture, and composite UI patterns. Both suites live in the [ui-craft](https://github.com/olzn/ui-craft) repo.
 
@@ -10,11 +10,11 @@ Companion to system-craft, which covers naming, tokens, component architecture, 
 
 ## Suite Boundary
 
-**surface-craft defines how interface parts look, move, respond, and feel in use.** It is the felt-quality layer: typography, colour, motion, interaction behaviour, platform details, accessibility polish, and visual refinement.
+**surface-craft defines how interface parts look, read, move, respond, and feel in use.** It is the felt-quality layer: typography, copy, colour, motion, interaction behaviour, platform details, accessibility polish, and visual refinement.
 
 Use **system-craft** when deciding what the interface is made from and how those parts are named, structured, and reused: vocabulary, tokens, component APIs, component composition, and composite patterns.
 
-Rule of thumb: if the question is "how should this render, feel, move, or behave in the browser?", start with surface-craft. If the question is "what is this thing, what is it called, and how does it fit into the reusable system?", use system-craft.
+Rule of thumb: if the question is "how should this render, read, feel, move, or behave in the browser?", start with surface-craft. If the question is "what is this thing, what is it called, and how does it fit into the reusable system?", use system-craft.
 
 ---
 
@@ -28,6 +28,7 @@ surface-craft/
 ├── motion-craft/SKILL.md       How to animate.
 ├── interaction-craft/SKILL.md  Whether and why to animate.
 ├── type-craft/SKILL.md         Typography systems.
+├── copy-craft/SKILL.md         Interface copy and UX writing.
 ├── colour-craft/SKILL.md       Colour systems.
 └── detail-craft/SKILL.md       Platform implementation details.
 ```
@@ -38,11 +39,11 @@ The shared design voice. Three pillars (Simplicity, Fluidity, Delight), taste pr
 
 ### accessibility.md
 
-Cross-reference guide for accessibility requirements scattered across all nine skills. Covers keyboard navigation, focus management, semantic HTML/ARIA, colour contrast, motion, disabled states, text/selection, and touch. Includes a combined verification checklist.
+Cross-reference guide for accessibility requirements scattered across all ten domain skills. Covers keyboard navigation, focus management, semantic HTML/ARIA, colour contrast, motion, disabled states, text/selection, and touch. Includes a combined verification checklist.
 
 ### composition.md
 
-How the nine skills work together. Ordered sequences for common tasks (new project setup, building a page, building a component, design system audit, visual polish pass), a lead-skill lookup table, and guidance on cross-skill boundaries.
+How the ten domain skills work together. Ordered sequences for common tasks (new project setup, building a page, building a component, design system audit, visual polish pass), a lead-skill lookup table, and guidance on cross-skill boundaries.
 
 Based on the work of [Benji Taylor](https://benji.org/family-values) and [Rauno Freiberg](https://rauno.me).
 
@@ -61,6 +62,10 @@ Sources: [Rauno Freiberg](https://rauno.me/craft/interaction-design), [Jakub Kr�
 ### type-craft
 
 Typography systems. Modular type scales with named ratios, fixed vs fluid typography (app UIs vs marketing), vertical rhythm and baseline grids, font loading strategy (`font-display: swap` + metric overrides + subsetting + preload + self-host), OpenType features (`kern`, `liga`, `calt`, `tabular-nums`, `oldstyle-nums`), variable font axes and optical sizing, font pairing (the rule of contrast, strategies), and text rendering (`antialiased`, `optimizeLegibility`, `text-wrap: balance`/`pretty` with long-text caveats).
+
+### copy-craft
+
+Interface copy and UX writing. Error message bodies, empty states, helper text, onboarding, tooltip prose, loading text, success and warning messages, confirmation body copy, marketing-style CTAs, tone, localisation notes, and copy reviews. Uses established terminology from naming-craft and does not rename product actions or concepts.
 
 ### colour-craft
 
@@ -89,6 +94,8 @@ Each skill fires independently based on the task. They don't fire in bulk on eve
 **"What easing curve for this entrance?"**: motion-craft fires.
 
 **"Create a colour palette with dark mode"**: colour-craft fires.
+
+**"This empty state copy feels unclear"**: copy-craft fires.
 
 ### The motion/interaction seam
 

@@ -5,7 +5,7 @@ set -e
 
 REPO_TARBALL="https://github.com/olzn/ui-craft/archive/refs/heads/main.tar.gz"
 TARGET_DIR="${TARGET_DIR:-${CODEX_HOME:-$HOME/.codex}/skills}"
-SURFACE_SKILLS="motion-craft interaction-craft type-craft colour-craft detail-craft"
+SURFACE_SKILLS="motion-craft interaction-craft type-craft copy-craft colour-craft detail-craft"
 SYSTEM_SKILLS="token-craft naming-craft component-craft pattern-craft"
 SHARED_FILES="design-philosophy.md accessibility.md composition.md"
 COORDINATOR_SKILL="ui-craft"

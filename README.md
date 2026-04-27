@@ -5,7 +5,7 @@ UI Craft is a two-suite skillset for building web interfaces with stronger struc
 It contains:
 
 - **ui-craft**: an agent-facing coordinator skill for routing broad UI tasks and applying suite best practices.
-- **surface-craft**: how interfaces look, move, respond, adapt to platform constraints, and feel in use.
+- **surface-craft**: how interfaces look, read, move, respond, adapt to platform constraints, and feel in use.
 - **system-craft**: what interface parts are made from, what they are called, and how they fit into a reusable system.
 
 The suite is designed for Codex, Claude Code, and other agents that can read `SKILL.md` files with YAML frontmatter.
@@ -27,6 +27,7 @@ ui-craft/
 │   ├── motion-craft/
 │   ├── interaction-craft/
 │   ├── type-craft/
+│   ├── copy-craft/
 │   ├── colour-craft/
 │   └── detail-craft/
 └── system-craft/
@@ -49,13 +50,14 @@ Each skill folder contains a `SKILL.md`. Some skills also include:
 
 - **ui-craft**: routes broad UI tasks to the right domain skills, applies suite-level best practices, and keeps agents from loading every skill by default.
 
-## The Nine Domain Skills
+## The Ten Domain Skills
 
 ### Surface Craft
 
 - **motion-craft**: animation implementation, easing, timing, transitions, exits, entrances, and motion polish.
 - **interaction-craft**: gesture intent, spatial logic, frequency calibration, drag behaviour, and whether something should animate.
 - **type-craft**: type scales, font loading, OpenType features, rhythm, wrapping, and rendering.
+- **copy-craft**: interface copy, microcopy, errors, empty states, onboarding, tooltips, and UX writing.
 - **colour-craft**: OKLCH palettes, semantic colours, contrast, dark mode, colour blindness, and theme mapping.
 - **detail-craft**: browser quirks, input details, touch behaviour, focus handling, performance micro-details, and visual polish.
 
@@ -96,13 +98,13 @@ Use the narrowest relevant skill first. If you need a button API, start with `co
 Start with structure, then refine the surface. For new work, the usual order is:
 
 ```text
-naming-craft -> token-craft -> component-craft -> pattern-craft -> surface-craft skills
+naming-craft -> token-craft -> component-craft -> pattern-craft -> copy-craft -> surface-craft skills
 ```
 
 For existing UI, reverse the order when the structure already exists:
 
 ```text
-detail-craft -> motion-craft -> type-craft -> colour-craft -> component-craft
+detail-craft -> copy-craft -> motion-craft -> type-craft -> colour-craft -> component-craft
 ```
 
 Do not invoke every skill by default. The suite works best when the lead skill is clear and supporting skills are pulled in only for their specific domain.
@@ -120,7 +122,7 @@ Treat references as optional depth. The `references/` files are for detailed rec
 | Task | Lead skill | Also check |
 |---|---|---|
 | Name a feature, command, button, token, or component | `naming-craft` | Relevant domain skill |
-| Write or revise explanatory UX text | `ux-copy` if available | `naming-craft` for terms |
+| Write or revise explanatory UX text | `copy-craft` | `naming-craft` for terms |
 | Define spacing, colour semantics, radius, shadow, or theme mappings | `token-craft` | `colour-craft`, `type-craft` |
 | Build a reusable component | `component-craft` | `naming-craft`, `token-craft`, `detail-craft` |
 | Design a form, table, navigation, feedback system, or page layout | `pattern-craft` | `component-craft`, `detail-craft` |
@@ -143,6 +145,10 @@ Use $naming-craft to audit these component, token, and Figma layer names for con
 ```
 
 ```text
+Use $copy-craft to improve the error messages, empty states, helper text, and onboarding copy in this flow.
+```
+
+```text
 Use $interaction-craft first, then $motion-craft, to decide and implement the behaviour for this swipe-to-dismiss card.
 ```
 
@@ -154,7 +160,7 @@ Use $detail-craft to review this modal for focus return, scroll lock, touch beha
 Use $token-craft and $colour-craft to define semantic colour tokens for light and dark themes with accessible contrast.
 ```
 
-When `ux-copy` is installed, use it for explanatory or persuasive writing such as error message bodies, empty states, onboarding, tooltips, loading copy, and marketing-style CTAs. Use `naming-craft` for product action labels, commands, feature names, UI terminology, and copy that must stay consistent across code, Figma, docs, analytics, or a glossary.
+Use `copy-craft` for explanatory or persuasive writing such as error message bodies, empty states, onboarding, tooltips, loading copy, and marketing-style CTAs. Use `naming-craft` for product action labels, commands, feature names, UI terminology, and copy that must stay consistent across code, Figma, docs, analytics, or a glossary.
 
 ---
 
@@ -205,6 +211,7 @@ ui-craft/
 motion-craft/
 interaction-craft/
 type-craft/
+copy-craft/
 colour-craft/
 detail-craft/
 token-craft/

@@ -1,6 +1,6 @@
 # Composition
 
-How the nine skills across surface-craft and system-craft work together. Use this guide to determine which skills to invoke, in what order, for common tasks.
+How the ten domain skills across surface-craft and system-craft work together. Use this guide to determine which skills to invoke, in what order, for common tasks.
 
 ---
 
@@ -10,17 +10,17 @@ How the nine skills across surface-craft and system-craft work together. Use thi
 
 **surface-craft** handles experiential questions: how those parts look, move, respond, adapt to platform constraints, meet accessibility expectations, and feel in use.
 
-Use this split before choosing an individual skill. Naming, tokens, component APIs, and composite patterns lead to system-craft. Typography, colour, motion, interaction behaviour, platform details, and visual polish lead to surface-craft.
+Use this split before choosing an individual skill. Naming, tokens, component APIs, and composite patterns lead to system-craft. Typography, copy, colour, motion, interaction behaviour, platform details, and visual polish lead to surface-craft.
 
 ---
 
 ## The General Order
 
 ```
-naming → tokens → type + colour → components → patterns → detail + motion + interaction
+naming -> tokens -> type + colour -> components -> patterns -> copy -> detail + motion + interaction
 ```
 
-Shared vocabulary and foundation scales first. Visual values next. Structure third. Assembly fourth. Polish last.
+Shared vocabulary and foundation scales first. Visual values next. Structure third. Assembly fourth. Copy and polish last.
 
 This is a dependency order, not a strict sequence. Later skills reference earlier ones, but you may loop back (e.g. adding a new token while building a component).
 
@@ -36,16 +36,18 @@ This is a dependency order, not a strict sequence. Later skills reference earlie
 4. **colour-craft**: OKLCH palette, semantic colour mapping, light/dark themes
 5. **component-craft**: base component conventions (prop names, CVA, forwarding)
 6. **pattern-craft**: layout structure, navigation, feedback strategy
+7. **copy-craft**: empty states, errors, onboarding, and helper text
 
 ### Building a page
 
 1. **pattern-craft** (lead): layout pattern, navigation, data display, feedback
 2. **component-craft**: components needed for the page
-3. **colour-craft**: verify contrast in both themes
-4. **type-craft**: verify scale, rhythm, and hierarchy
-5. **detail-craft**: platform details, touch, scroll, performance
-6. **motion-craft**: entrance animations, scroll reveals
-7. **interaction-craft**: gesture decisions, frequency calibration
+3. **copy-craft**: page copy, empty states, errors, helper text
+4. **colour-craft**: verify contrast in both themes
+5. **type-craft**: verify scale, rhythm, and hierarchy
+6. **detail-craft**: platform details, touch, scroll, performance
+7. **motion-craft**: entrance animations, scroll reveals
+8. **interaction-craft**: gesture decisions, frequency calibration
 
 ### Building a component
 
@@ -63,14 +65,16 @@ This is a dependency order, not a strict sequence. Later skills reference earlie
 3. **component-craft**: API consistency, missing states, variant alignment
 4. **colour-craft**: contrast compliance, colour blindness, theme coverage
 5. **type-craft**: scale adherence, loading performance, feature usage
-6. **pattern-craft**: feedback consistency, navigation structure, form validation
+6. **copy-craft**: error, empty, onboarding, and helper copy consistency
+7. **pattern-craft**: feedback consistency, navigation structure, form validation
 
 ### Visual polish pass
 
 1. **detail-craft** (lead): concentric radii, optical alignment, shadows, hit areas, safe areas, selection
-2. **motion-craft**: easing, duration, paired timing, exit patterns, stagger
-3. **interaction-craft**: frequency calibration, spatial consistency, staging
-4. **colour-craft**: dark mode fine-tuning, brand colour adjustments
+2. **copy-craft**: unclear labels' surrounding text, empty states, errors, helper text
+3. **motion-craft**: easing, duration, paired timing, exit patterns, stagger
+4. **interaction-craft**: frequency calibration, spatial consistency, staging
+5. **colour-craft**: dark mode fine-tuning, brand colour adjustments
 
 ---
 
@@ -82,6 +86,7 @@ This is a dependency order, not a strict sequence. Later skills reference earlie
 | Token/scale setup | token-craft | colour-craft, type-craft |
 | Colour palette or theme | colour-craft | token-craft |
 | Type system | type-craft | token-craft |
+| Interface copy or UX writing | copy-craft | naming-craft |
 | New component | component-craft | naming-craft, token-craft, detail-craft |
 | Page layout | pattern-craft | component-craft, detail-craft |
 | Form implementation | pattern-craft | component-craft, detail-craft |
@@ -104,6 +109,8 @@ These are the most common boundary questions:
 **"Should this animate?"** → interaction-craft decides. **"How should it animate?"** → motion-craft implements.
 
 **"What should this be called?"** → naming-craft decides. **"How should it be built?"** → the relevant domain skill implements.
+
+**"What should this action be called?"** → naming-craft decides. **"What explanatory copy surrounds it?"** → copy-craft writes.
 
 **"What shadow value?"** → token-craft owns the scale. **"Box-shadow vs border?"** → detail-craft recommends shadows.
 
