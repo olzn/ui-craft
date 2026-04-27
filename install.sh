@@ -5,10 +5,11 @@ set -e
 
 REPO_TARBALL="https://github.com/olzn/ui-craft/archive/refs/heads/main.tar.gz"
 TARGET_DIR="${TARGET_DIR:-${CODEX_HOME:-$HOME/.codex}/skills}"
-SURFACE_SKILLS="motion-craft interaction-craft type-craft copy-craft colour-craft detail-craft"
-SYSTEM_SKILLS="token-craft naming-craft component-craft pattern-craft"
+SURFACE_SKILLS="surface-motion surface-interaction surface-typography surface-copy surface-colour surface-details"
+SYSTEM_SKILLS="system-tokens system-naming system-components system-patterns"
 SHARED_FILES="design-philosophy.md accessibility.md composition.md"
 COORDINATOR_SKILL="ui-craft"
+LEGACY_SKILLS="motion-craft interaction-craft type-craft copy-craft colour-craft detail-craft token-craft naming-craft component-craft pattern-craft surface-craft system-craft"
 
 SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" 2>/dev/null && pwd 2>/dev/null || echo "")"
 TMP_DIR=""
@@ -21,7 +22,7 @@ cleanup() {
 
 trap cleanup EXIT INT TERM
 
-if [ -n "$SCRIPT_DIR" ] && [ -d "$SCRIPT_DIR/surface-craft" ] && [ -d "$SCRIPT_DIR/system-craft" ]; then
+if [ -n "$SCRIPT_DIR" ] && [ -d "$SCRIPT_DIR/surface" ] && [ -d "$SCRIPT_DIR/system" ]; then
   SRC_ROOT="$SCRIPT_DIR"
 else
   TMP_DIR="${TMPDIR:-/tmp}/ui-craft-install-$$"
@@ -50,18 +51,25 @@ copy_dir() {
 echo "Installing UI Craft skills to $TARGET_DIR ..."
 mkdir -p "$TARGET_DIR"
 
+for skill in $LEGACY_SKILLS; do
+  if [ -d "$TARGET_DIR/$skill" ]; then
+    rm -rf "$TARGET_DIR/$skill"
+    printf '  removed legacy %s/\n' "$TARGET_DIR/$skill"
+  fi
+done
+
 for file in $SHARED_FILES; do
-  copy_file "$SRC_ROOT/surface-craft/$file" "$TARGET_DIR/$file"
+  copy_file "$SRC_ROOT/surface/$file" "$TARGET_DIR/$file"
 done
 
 copy_dir "$SRC_ROOT/$COORDINATOR_SKILL" "$TARGET_DIR/$COORDINATOR_SKILL"
 
 for skill in $SURFACE_SKILLS; do
-  copy_dir "$SRC_ROOT/surface-craft/$skill" "$TARGET_DIR/$skill"
+  copy_dir "$SRC_ROOT/surface/$skill" "$TARGET_DIR/$skill"
 done
 
 for skill in $SYSTEM_SKILLS; do
-  copy_dir "$SRC_ROOT/system-craft/$skill" "$TARGET_DIR/$skill"
+  copy_dir "$SRC_ROOT/system/$skill" "$TARGET_DIR/$skill"
 done
 
 echo "Done."

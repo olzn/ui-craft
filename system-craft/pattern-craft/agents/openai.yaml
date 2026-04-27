@@ -1,4 +1,0 @@
-interface:
-  display_name: "Pattern Craft"
-  short_description: "Composite UI patterns for product features."
-  default_prompt: "Use $pattern-craft to structure forms, navigation, tables, feedback, layouts, and larger UI feature patterns."

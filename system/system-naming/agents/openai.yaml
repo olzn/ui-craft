@@ -1,0 +1,4 @@
+interface:
+  display_name: "Naming"
+  short_description: "Name interface and design-system concepts consistently."
+  default_prompt: "Use $system-naming to evaluate names, labels, terminology, and taxonomy across UI, design-system, and product surfaces."

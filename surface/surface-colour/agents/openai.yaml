@@ -1,0 +1,4 @@
+interface:
+  display_name: "Colour"
+  short_description: "Accessible colour systems and theme mapping."
+  default_prompt: "Use $surface-colour to create or review palettes, semantic colours, contrast, dark mode, colour blindness, and OKLCH scales."

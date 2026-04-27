@@ -1,0 +1,4 @@
+interface:
+  display_name: "Motion"
+  short_description: "Precise animation, easing, and transition guidance."
+  default_prompt: "Use $surface-motion to implement or review animation values, easing, timing, transitions, exits, entrances, and motion polish."

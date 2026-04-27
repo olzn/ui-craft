@@ -1,4 +1,0 @@
-interface:
-  display_name: "Interaction Craft"
-  short_description: "Gesture, spatial, and interaction behaviour decisions."
-  default_prompt: "Use $interaction-craft to decide gesture behaviour, spatial logic, animation intent, interaction timing, and release physics."

@@ -5,8 +5,8 @@ UI Craft is a two-suite skillset for building web interfaces with stronger struc
 It contains:
 
 - **ui-craft**: an agent-facing coordinator skill for routing broad UI tasks and applying suite best practices.
-- **surface-craft**: how interfaces look, read, move, respond, adapt to platform constraints, and feel in use.
-- **system-craft**: what interface parts are made from, what they are called, and how they fit into a reusable system.
+- **surface**: how interfaces look, read, move, respond, adapt to platform constraints, and feel in use.
+- **system**: what interface parts are made from, what they are called, and how they fit into a reusable system.
 
 The suite is designed for Codex, Claude Code, and other agents that can read `SKILL.md` files with YAML frontmatter.
 
@@ -19,23 +19,23 @@ ui-craft/
 ├── ui-craft/
 │   ├── SKILL.md
 │   └── agents/openai.yaml
-├── surface-craft/
+├── surface/
 │   ├── README.md
 │   ├── accessibility.md
 │   ├── composition.md
 │   ├── design-philosophy.md
-│   ├── motion-craft/
-│   ├── interaction-craft/
-│   ├── type-craft/
-│   ├── copy-craft/
-│   ├── colour-craft/
-│   └── detail-craft/
-└── system-craft/
+│   ├── surface-motion/
+│   ├── surface-interaction/
+│   ├── surface-typography/
+│   ├── surface-copy/
+│   ├── surface-colour/
+│   └── surface-details/
+└── system/
     ├── README.md
-    ├── token-craft/
-    ├── naming-craft/
-    ├── component-craft/
-    └── pattern-craft/
+    ├── system-tokens/
+    ├── system-naming/
+    ├── system-components/
+    └── system-patterns/
 ```
 
 Each skill folder contains a `SKILL.md`. Some skills also include:
@@ -52,21 +52,21 @@ Each skill folder contains a `SKILL.md`. Some skills also include:
 
 ## The Ten Domain Skills
 
-### Surface Craft
+### Surface
 
-- **motion-craft**: animation implementation, easing, timing, transitions, exits, entrances, and motion polish.
-- **interaction-craft**: gesture intent, spatial logic, frequency calibration, drag behaviour, and whether something should animate.
-- **type-craft**: type scales, font loading, OpenType features, rhythm, wrapping, and rendering.
-- **copy-craft**: interface copy, microcopy, errors, empty states, onboarding, tooltips, and UX writing.
-- **colour-craft**: OKLCH palettes, semantic colours, contrast, dark mode, colour blindness, and theme mapping.
-- **detail-craft**: browser quirks, input details, touch behaviour, focus handling, performance micro-details, and visual polish.
+- **surface-motion**: animation implementation, easing, timing, transitions, exits, entrances, and motion polish.
+- **surface-interaction**: gesture intent, spatial logic, frequency calibration, drag behaviour, and whether something should animate.
+- **surface-typography**: type scales, font loading, OpenType features, rhythm, wrapping, and rendering.
+- **surface-copy**: interface copy, microcopy, errors, empty states, onboarding, tooltips, and UX writing.
+- **surface-colour**: OKLCH palettes, semantic colours, contrast, dark mode, colour blindness, and theme mapping.
+- **surface-details**: browser quirks, input details, touch behaviour, focus handling, performance micro-details, and visual polish.
 
-### System Craft
+### System
 
-- **token-craft**: design token architecture, foundation scales, semantic mappings, and theming.
-- **naming-craft**: labels, commands, variables, classes, tokens, icons, components, features, products, and UI terminology.
-- **component-craft**: reusable component APIs, variants, composition, state coverage, and icon conventions.
-- **pattern-craft**: forms, navigation, tables, feedback, layouts, and larger product patterns.
+- **system-tokens**: design token architecture, foundation scales, semantic mappings, and theming.
+- **system-naming**: labels, commands, variables, classes, tokens, icons, components, features, products, and UI terminology.
+- **system-components**: reusable component APIs, variants, composition, state coverage, and icon conventions.
+- **system-patterns**: forms, navigation, tables, feedback, layouts, and larger product patterns.
 
 ---
 
@@ -93,23 +93,23 @@ Poor fits:
 
 ## Best Practices
 
-Use the narrowest relevant skill first. If you need a button API, start with `component-craft`, not the whole suite. If you need the button label, use `naming-craft`. If the button feels visually off, use `detail-craft` or `motion-craft`.
+Use the narrowest relevant skill first. If you need a button API, start with `system-components`, not the whole suite. If you need the button label, use `system-naming`. If the button feels visually off, use `surface-details` or `surface-motion`.
 
 Start with structure, then refine the surface. For new work, the usual order is:
 
 ```text
-naming-craft -> token-craft -> component-craft -> pattern-craft -> copy-craft -> surface-craft skills
+system-naming -> system-tokens -> system-components -> system-patterns -> surface-copy -> surface skills
 ```
 
 For existing UI, reverse the order when the structure already exists:
 
 ```text
-detail-craft -> copy-craft -> motion-craft -> type-craft -> colour-craft -> component-craft
+surface-details -> surface-copy -> surface-motion -> surface-typography -> surface-colour -> system-components
 ```
 
 Do not invoke every skill by default. The suite works best when the lead skill is clear and supporting skills are pulled in only for their specific domain.
 
-Use `surface-craft/composition.md` for multi-skill tasks. It defines common sequences for new project setup, component work, page work, audits, accessibility reviews, and visual polish passes.
+Use `surface/composition.md` for multi-skill tasks. It defines common sequences for new project setup, component work, page work, audits, accessibility reviews, and visual polish passes.
 
 Keep `learnings.md` useful. When a project-specific browser quirk, library behaviour, or implementation edge case appears, add a short finding to the relevant skill's `learnings.md` so the suite improves through use.
 
@@ -121,46 +121,46 @@ Treat references as optional depth. The `references/` files are for detailed rec
 
 | Task | Lead skill | Also check |
 |---|---|---|
-| Name a feature, command, button, token, or component | `naming-craft` | Relevant domain skill |
-| Write or revise explanatory UX text | `copy-craft` | `naming-craft` for terms |
-| Define spacing, colour semantics, radius, shadow, or theme mappings | `token-craft` | `colour-craft`, `type-craft` |
-| Build a reusable component | `component-craft` | `naming-craft`, `token-craft`, `detail-craft` |
-| Design a form, table, navigation, feedback system, or page layout | `pattern-craft` | `component-craft`, `detail-craft` |
-| Decide whether something should animate or how a gesture should behave | `interaction-craft` | `motion-craft` |
-| Implement easing, timing, transitions, entrances, exits, or icon swaps | `motion-craft` | `interaction-craft`, `detail-craft` |
-| Set up type scale, font loading, wrapping, rhythm, or OpenType features | `type-craft` | `token-craft` |
-| Build palettes, contrast, dark mode, or colour-blind-safe states | `colour-craft` | `token-craft` |
-| Polish browser details, focus, touch, inputs, scroll, or visual finish | `detail-craft` | `motion-craft`, `accessibility.md` |
+| Name a feature, command, button, token, or component | `system-naming` | Relevant domain skill |
+| Write or revise explanatory UX text | `surface-copy` | `system-naming` for terms |
+| Define spacing, colour semantics, radius, shadow, or theme mappings | `system-tokens` | `surface-colour`, `surface-typography` |
+| Build a reusable component | `system-components` | `system-naming`, `system-tokens`, `surface-details` |
+| Design a form, table, navigation, feedback system, or page layout | `system-patterns` | `system-components`, `surface-details` |
+| Decide whether something should animate or how a gesture should behave | `surface-interaction` | `surface-motion` |
+| Implement easing, timing, transitions, entrances, exits, or icon swaps | `surface-motion` | `surface-interaction`, `surface-details` |
+| Set up type scale, font loading, wrapping, rhythm, or OpenType features | `surface-typography` | `system-tokens` |
+| Build palettes, contrast, dark mode, or colour-blind-safe states | `surface-colour` | `system-tokens` |
+| Polish browser details, focus, touch, inputs, scroll, or visual finish | `surface-details` | `surface-motion`, `accessibility.md` |
 
 ---
 
 ## Prompt Examples
 
 ```text
-Use $pattern-craft and $component-craft to design a billing settings form with validation, loading, error, and empty states.
+Use $system-patterns and $system-components to design a billing settings form with validation, loading, error, and empty states.
 ```
 
 ```text
-Use $naming-craft to audit these component, token, and Figma layer names for consistency.
+Use $system-naming to audit these component, token, and Figma layer names for consistency.
 ```
 
 ```text
-Use $copy-craft to improve the error messages, empty states, helper text, and onboarding copy in this flow.
+Use $surface-copy to improve the error messages, empty states, helper text, and onboarding copy in this flow.
 ```
 
 ```text
-Use $interaction-craft first, then $motion-craft, to decide and implement the behaviour for this swipe-to-dismiss card.
+Use $surface-interaction first, then $surface-motion, to decide and implement the behaviour for this swipe-to-dismiss card.
 ```
 
 ```text
-Use $detail-craft to review this modal for focus return, scroll lock, touch behaviour, safe areas, and visual polish.
+Use $surface-details to review this modal for focus return, scroll lock, touch behaviour, safe areas, and visual polish.
 ```
 
 ```text
-Use $token-craft and $colour-craft to define semantic colour tokens for light and dark themes with accessible contrast.
+Use $system-tokens and $surface-colour to define semantic colour tokens for light and dark themes with accessible contrast.
 ```
 
-Use `copy-craft` for explanatory or persuasive writing such as error message bodies, empty states, onboarding, tooltips, loading copy, and marketing-style CTAs. Use `naming-craft` for product action labels, commands, feature names, UI terminology, and copy that must stay consistent across code, Figma, docs, analytics, or a glossary.
+Use `surface-copy` for explanatory or persuasive writing such as error message bodies, empty states, onboarding, tooltips, loading copy, and marketing-style CTAs. Use `system-naming` for product action labels, commands, feature names, UI terminology, and copy that must stay consistent across code, Figma, docs, analytics, or a glossary.
 
 ---
 
@@ -208,16 +208,16 @@ Then copy each skill folder into the same directory:
 
 ```text
 ui-craft/
-motion-craft/
-interaction-craft/
-type-craft/
-copy-craft/
-colour-craft/
-detail-craft/
-token-craft/
-naming-craft/
-component-craft/
-pattern-craft/
+surface-motion/
+surface-interaction/
+surface-typography/
+surface-copy/
+surface-colour/
+surface-details/
+system-tokens/
+system-naming/
+system-components/
+system-patterns/
 ```
 
 The shared references are deliberately flat because individual skills point to them by filename.
@@ -228,9 +228,9 @@ The shared references are deliberately flat because individual skills point to t
 
 Read:
 
-- [surface-craft/README.md](surface-craft/README.md) for the experiential surface layer.
-- [system-craft/README.md](system-craft/README.md) for the structural system layer.
-- [surface-craft/composition.md](surface-craft/composition.md) for sequencing and lead-skill selection.
+- [surface/README.md](surface/README.md) for the experiential surface layer.
+- [system/README.md](system/README.md) for the structural system layer.
+- [surface/composition.md](surface/composition.md) for sequencing and lead-skill selection.
 
 ---
 

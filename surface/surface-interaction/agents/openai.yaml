@@ -1,0 +1,4 @@
+interface:
+  display_name: "Interaction"
+  short_description: "Gesture, spatial, and interaction behaviour decisions."
+  default_prompt: "Use $surface-interaction to decide gesture behaviour, spatial logic, animation intent, interaction timing, and release physics."

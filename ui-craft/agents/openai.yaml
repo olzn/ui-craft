@@ -1,4 +1,4 @@
 interface:
   display_name: "UI Craft"
   short_description: "Route UI Craft skills and best practices."
-  default_prompt: "Use $ui-craft to choose the right craft skills, route a broad UI task, or review an interface across structure and surface quality."
+  default_prompt: "Use $ui-craft to choose the right domain skills, route a broad UI task, or review an interface across structure and surface quality."

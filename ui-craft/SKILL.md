@@ -1,6 +1,6 @@
 ---
 name: ui-craft
-description: Coordinate the UI Craft skill suite. Use when a user asks for broad UI design, frontend quality, design-system work, interface review, visual polish, UX writing, or when it is unclear which craft skill should lead. Routes work across naming, tokens, components, patterns, copy, motion, interaction, typography, colour, and detail. Use for "make this UI better", "review this interface", "improve this design system", "which craft skill applies", or multi-skill UI tasks. This is a coordinator, not a replacement for the focused domain skills.
+description: Coordinate the UI Craft skill suite. Use when a user asks for broad UI design, frontend quality, design-system work, interface review, visual polish, UX writing, or when it is unclear which domain skill should lead. Routes work across naming, tokens, components, patterns, copy, motion, interaction, typography, colour, and detail. Use for "make this UI better", "review this interface", "improve this design system", "which skill applies", or multi-skill UI tasks. This is a coordinator, not a replacement for the focused domain skills.
 ---
 
 # UI Craft
@@ -13,18 +13,18 @@ This is a coordinator skill. It does not replace the ten domain skills. Use it t
 
 ## Core Rules
 
-Use the narrowest relevant skill first. Do not load or apply every craft skill by default.
+Use the narrowest relevant skill first. Do not load or apply every domain skill by default.
 
 For new systems or new features, start with structure before surface:
 
 ```text
-naming-craft -> token-craft -> component-craft -> pattern-craft -> copy-craft -> surface skills
+system-naming -> system-tokens -> system-components -> system-patterns -> surface-copy -> surface skills
 ```
 
 For existing UI polish, start with the surface:
 
 ```text
-detail-craft -> copy-craft -> motion-craft -> type-craft -> colour-craft -> component-craft
+surface-details -> surface-copy -> surface-motion -> surface-typography -> surface-colour -> system-components
 ```
 
 Use references only when needed. `references/` files contain deeper recipes and audits; they are not required for every task.
@@ -37,16 +37,16 @@ Keep learnings useful. When a reusable project quirk or library behaviour appear
 
 | Task | Lead skill | Also check |
 |---|---|---|
-| Name a feature, command, button, token, or component | `naming-craft` | Relevant domain skill |
-| Write or revise explanatory UX text | `copy-craft` | `naming-craft` for terms |
-| Define spacing, radius, shadow, z-index, breakpoints, or theme mappings | `token-craft` | `colour-craft`, `type-craft` |
-| Build a reusable component | `component-craft` | `naming-craft`, `token-craft`, `detail-craft` |
-| Design a form, table, navigation, feedback system, or page layout | `pattern-craft` | `component-craft`, `detail-craft` |
-| Decide whether something should animate or how a gesture should behave | `interaction-craft` | `motion-craft` |
-| Implement easing, timing, transitions, entrances, exits, or icon swaps | `motion-craft` | `interaction-craft`, `detail-craft` |
-| Set up type scale, font loading, wrapping, rhythm, or OpenType features | `type-craft` | `token-craft` |
-| Build palettes, contrast, dark mode, or colour-blind-safe states | `colour-craft` | `token-craft` |
-| Polish browser details, focus, touch, inputs, scroll, or visual finish | `detail-craft` | `motion-craft`, `accessibility.md` |
+| Name a feature, command, button, token, or component | `system-naming` | Relevant domain skill |
+| Write or revise explanatory UX text | `surface-copy` | `system-naming` for terms |
+| Define spacing, radius, shadow, z-index, breakpoints, or theme mappings | `system-tokens` | `surface-colour`, `surface-typography` |
+| Build a reusable component | `system-components` | `system-naming`, `system-tokens`, `surface-details` |
+| Design a form, table, navigation, feedback system, or page layout | `system-patterns` | `system-components`, `surface-details` |
+| Decide whether something should animate or how a gesture should behave | `surface-interaction` | `surface-motion` |
+| Implement easing, timing, transitions, entrances, exits, or icon swaps | `surface-motion` | `surface-interaction`, `surface-details` |
+| Set up type scale, font loading, wrapping, rhythm, or OpenType features | `surface-typography` | `system-tokens` |
+| Build palettes, contrast, dark mode, or colour-blind-safe states | `surface-colour` | `system-tokens` |
+| Polish browser details, focus, touch, inputs, scroll, or visual finish | `surface-details` | `surface-motion`, `accessibility.md` |
 
 ---
 
@@ -71,42 +71,42 @@ Do not use UI Craft for:
 
 ## Prompt Handling
 
-If the user names a specific craft skill, use that skill directly.
+If the user names a specific domain skill, use that skill directly.
 
 If the user asks a broad UI question, choose a lead skill and name the supporting skills you will check.
 
 If the user asks for a review, lead with findings and cite file/line references where possible. Prioritise bugs, accessibility failures, behavioural regressions, and missing states before subjective taste.
 
-If the user asks to build or change UI, implement the change. Use the relevant craft guidance as working constraints, not as a long explanation to the user.
+If the user asks to build or change UI, implement the relevant guidance as working constraints, not as a long explanation to the user.
 
 If multiple skills apply, keep the sequence explicit and short. Example:
 
 ```text
-Lead with pattern-craft for form structure, then component-craft for field/button APIs, then detail-craft for focus and mobile input behaviour.
+Lead with system-patterns for form structure, then system-components for field/button APIs, then surface-details for focus and mobile input behaviour.
 ```
 
-### Boundary With copy-craft
+### Boundary With surface-copy
 
-Use `copy-craft` for explanatory and persuasive interface writing: error message bodies, empty state body text, onboarding text, tooltip wording, loading copy, and marketing-style CTAs.
+Use `surface-copy` for explanatory and persuasive interface writing: error message bodies, empty state body text, onboarding text, tooltip wording, loading copy, and marketing-style CTAs.
 
-Use `naming-craft` for product action labels and terminology: button labels, command names, menu items, confirmation action labels, feature names, component names, token names, and any wording that must stay consistent across UI, code, Figma, docs, analytics, or a glossary.
+Use `system-naming` for product action labels and terminology: button labels, command names, menu items, confirmation action labels, feature names, component names, token names, and any wording that must stay consistent across UI, code, Figma, docs, analytics, or a glossary.
 
-For full flows, sequence them: `naming-craft` establishes the vocabulary and action labels; `copy-craft` writes the surrounding explanatory copy and tone variants.
+For full flows, sequence them: `system-naming` establishes the vocabulary and action labels; `surface-copy` writes the surrounding explanatory copy and tone variants.
 
 ---
 
 ## Common Routes
 
-**"Make this UI better"**: `detail-craft` lead; check `motion-craft`, `type-craft`, and `colour-craft`.
+**"Make this UI better"**: `surface-details` lead; check `surface-motion`, `surface-typography`, and `surface-colour`.
 
-**"Build a reusable Button"**: `component-craft` lead; check `naming-craft`, `token-craft`, `motion-craft`, and `detail-craft`.
+**"Build a reusable Button"**: `system-components` lead; check `system-naming`, `system-tokens`, `surface-motion`, and `surface-details`.
 
-**"Design this settings page"**: `pattern-craft` lead; check `component-craft`, `naming-craft`, and `detail-craft`.
+**"Design this settings page"**: `system-patterns` lead; check `system-components`, `system-naming`, and `surface-details`.
 
-**"This copy feels unclear"**: `copy-craft` lead; check `naming-craft` for established terms.
+**"This copy feels unclear"**: `surface-copy` lead; check `system-naming` for established terms.
 
-**"This animation feels wrong"**: `motion-craft` lead; check `interaction-craft` for whether the motion logic is right.
+**"This animation feels wrong"**: `surface-motion` lead; check `surface-interaction` for whether the motion logic is right.
 
-**"Audit the design system"**: `token-craft` lead; check `naming-craft`, `component-craft`, `colour-craft`, and `type-craft`.
+**"Audit the design system"**: `system-tokens` lead; check `system-naming`, `system-components`, `surface-colour`, and `surface-typography`.
 
 **"This interface is inaccessible"**: use `accessibility.md` as the cross-suite checklist, then apply the owning domain skill for each issue.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tokens"
+  short_description: "Design token architecture and foundation scales."
+  default_prompt: "Use $system-tokens to define, audit, or refine design tokens, foundation scales, semantic mappings, and theming structure."

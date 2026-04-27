@@ -1,4 +1,0 @@
-interface:
-  display_name: "Component Craft"
-  short_description: "Reusable UI component APIs and state coverage."
-  default_prompt: "Use $component-craft to design or review reusable UI components, APIs, variants, composition, states, and icon conventions."

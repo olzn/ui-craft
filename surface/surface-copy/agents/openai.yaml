@@ -1,0 +1,4 @@
+interface:
+  display_name: "Copy"
+  short_description: "Interface copy, microcopy, and UX writing."
+  default_prompt: "Use $surface-copy to write or review interface copy, microcopy, empty states, errors, onboarding, tooltips, and UX writing."
