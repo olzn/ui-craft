@@ -1,0 +1,101 @@
+---
+name: ui-craft
+description: Coordinate the UI Craft skill suite. Use when a user asks for broad UI design, frontend quality, design-system work, interface review, visual polish, or when it is unclear which craft skill should lead. Routes work across naming, tokens, components, patterns, motion, interaction, typography, colour, and detail. Use for "make this UI better", "review this interface", "improve this design system", "which craft skill applies", or multi-skill UI tasks. This is a coordinator, not a replacement for the focused domain skills.
+---
+
+# UI Craft
+
+Agent-facing routing and usage guidance for the UI Craft suite.
+
+This is a coordinator skill. It does not replace the nine domain skills. Use it to decide which skill should lead, which supporting skills to check, and how much guidance to load.
+
+---
+
+## Core Rules
+
+Use the narrowest relevant skill first. Do not load or apply every craft skill by default.
+
+For new systems or new features, start with structure before surface:
+
+```text
+naming-craft -> token-craft -> component-craft -> pattern-craft -> surface skills
+```
+
+For existing UI polish, start with the surface:
+
+```text
+detail-craft -> motion-craft -> type-craft -> colour-craft -> component-craft
+```
+
+Use references only when needed. `references/` files contain deeper recipes and audits; they are not required for every task.
+
+Keep learnings useful. When a reusable project quirk or library behaviour appears, append a short finding to the relevant `learnings.md`.
+
+---
+
+## Skill Selection
+
+| Task | Lead skill | Also check |
+|---|---|---|
+| Name a feature, command, button, token, or component | `naming-craft` | Relevant domain skill |
+| Define spacing, radius, shadow, z-index, breakpoints, or theme mappings | `token-craft` | `colour-craft`, `type-craft` |
+| Build a reusable component | `component-craft` | `naming-craft`, `token-craft`, `detail-craft` |
+| Design a form, table, navigation, feedback system, or page layout | `pattern-craft` | `component-craft`, `detail-craft` |
+| Decide whether something should animate or how a gesture should behave | `interaction-craft` | `motion-craft` |
+| Implement easing, timing, transitions, entrances, exits, or icon swaps | `motion-craft` | `interaction-craft`, `detail-craft` |
+| Set up type scale, font loading, wrapping, rhythm, or OpenType features | `type-craft` | `token-craft` |
+| Build palettes, contrast, dark mode, or colour-blind-safe states | `colour-craft` | `token-craft` |
+| Polish browser details, focus, touch, inputs, scroll, or visual finish | `detail-craft` | `motion-craft`, `accessibility.md` |
+
+---
+
+## When To Use
+
+Use UI Craft for:
+
+- New app screens, product features, settings pages, dashboards, forms, tables, command menus, modals, and navigation structures.
+- Design-system setup or audit work.
+- Frontend reviews that need visual polish, accessibility, motion, interaction behaviour, naming consistency, and production readiness.
+- Rough UI that needs to become coherent, usable, and shippable.
+- Browser-specific interface bugs such as iOS input zoom, sticky hover, scroll lock, focus return, layout shift, or animation jank.
+
+Do not use UI Craft for:
+
+- Backend-only work with no user interface.
+- Pure infrastructure, deployment, data modelling, or API design.
+- Brand strategy or product positioning without an interface or design-system surface.
+- Native mobile interface work where web platform rules do not apply.
+
+---
+
+## Prompt Handling
+
+If the user names a specific craft skill, use that skill directly.
+
+If the user asks a broad UI question, choose a lead skill and name the supporting skills you will check.
+
+If the user asks for a review, lead with findings and cite file/line references where possible. Prioritise bugs, accessibility failures, behavioural regressions, and missing states before subjective taste.
+
+If the user asks to build or change UI, implement the change. Use the relevant craft guidance as working constraints, not as a long explanation to the user.
+
+If multiple skills apply, keep the sequence explicit and short. Example:
+
+```text
+Lead with pattern-craft for form structure, then component-craft for field/button APIs, then detail-craft for focus and mobile input behaviour.
+```
+
+---
+
+## Common Routes
+
+**"Make this UI better"**: `detail-craft` lead; check `motion-craft`, `type-craft`, and `colour-craft`.
+
+**"Build a reusable Button"**: `component-craft` lead; check `naming-craft`, `token-craft`, `motion-craft`, and `detail-craft`.
+
+**"Design this settings page"**: `pattern-craft` lead; check `component-craft`, `naming-craft`, and `detail-craft`.
+
+**"This animation feels wrong"**: `motion-craft` lead; check `interaction-craft` for whether the motion logic is right.
+
+**"Audit the design system"**: `token-craft` lead; check `naming-craft`, `component-craft`, `colour-craft`, and `type-craft`.
+
+**"This interface is inaccessible"**: use `accessibility.md` as the cross-suite checklist, then apply the owning domain skill for each issue.

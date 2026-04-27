@@ -4,6 +4,7 @@ UI Craft is a two-suite skillset for building web interfaces with stronger struc
 
 It contains:
 
+- **ui-craft**: an agent-facing coordinator skill for routing broad UI tasks and applying suite best practices.
 - **surface-craft**: how interfaces look, move, respond, adapt to platform constraints, and feel in use.
 - **system-craft**: what interface parts are made from, what they are called, and how they fit into a reusable system.
 
@@ -15,6 +16,9 @@ The suite is designed for Codex, Claude Code, and other agents that can read `SK
 
 ```text
 ui-craft/
+├── ui-craft/
+│   ├── SKILL.md
+│   └── agents/openai.yaml
 ├── surface-craft/
 │   ├── README.md
 │   ├── accessibility.md
@@ -41,7 +45,11 @@ Each skill folder contains a `SKILL.md`. Some skills also include:
 
 ---
 
-## The Nine Skills
+## Coordinator Skill
+
+- **ui-craft**: routes broad UI tasks to the right domain skills, applies suite-level best practices, and keeps agents from loading every skill by default.
+
+## The Nine Domain Skills
 
 ### Surface Craft
 
@@ -190,6 +198,7 @@ composition.md
 Then copy each skill folder into the same directory:
 
 ```text
+ui-craft/
 motion-craft/
 interaction-craft/
 type-craft/

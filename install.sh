@@ -8,6 +8,7 @@ TARGET_DIR="${TARGET_DIR:-${CODEX_HOME:-$HOME/.codex}/skills}"
 SURFACE_SKILLS="motion-craft interaction-craft type-craft colour-craft detail-craft"
 SYSTEM_SKILLS="token-craft naming-craft component-craft pattern-craft"
 SHARED_FILES="design-philosophy.md accessibility.md composition.md"
+COORDINATOR_SKILL="ui-craft"
 
 SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" 2>/dev/null && pwd 2>/dev/null || echo "")"
 TMP_DIR=""
@@ -52,6 +53,8 @@ mkdir -p "$TARGET_DIR"
 for file in $SHARED_FILES; do
   copy_file "$SRC_ROOT/surface-craft/$file" "$TARGET_DIR/$file"
 done
+
+copy_dir "$SRC_ROOT/$COORDINATOR_SKILL" "$TARGET_DIR/$COORDINATOR_SKILL"
 
 for skill in $SURFACE_SKILLS; do
   copy_dir "$SRC_ROOT/surface-craft/$skill" "$TARGET_DIR/$skill"
