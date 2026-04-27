@@ -17,10 +17,10 @@ Use this split before choosing an individual skill. Naming, tokens, component AP
 ## The General Order
 
 ```
-naming -> tokens -> type + colour -> components -> patterns -> copy -> detail + motion + interaction
+system-naming -> system-tokens -> surface-typography/surface-colour -> system-components -> system-patterns -> surface-copy -> surface-details/surface-interaction/surface-motion
 ```
 
-Shared vocabulary and foundation scales first. Visual values next. Structure third. Assembly fourth. Copy and polish last.
+Shared vocabulary and foundation scales first. Visual values next. Component structure third. Assembly fourth. Copy, platform details, interaction, and motion last.
 
 This is a dependency order, not a strict sequence. Later skills reference earlier ones, but you may loop back (e.g. adding a new token while building a component).
 
@@ -72,8 +72,8 @@ This is a dependency order, not a strict sequence. Later skills reference earlie
 
 1. **surface-details** (lead): concentric radii, optical alignment, shadows, hit areas, safe areas, selection
 2. **surface-copy**: unclear labels' surrounding text, empty states, errors, helper text
-3. **surface-motion**: easing, duration, paired timing, exit patterns, stagger
-4. **surface-interaction**: frequency calibration, spatial consistency, staging
+3. **surface-interaction**: frequency calibration, spatial consistency, staging
+4. **surface-motion**: easing, duration, paired timing, exit patterns, stagger
 5. **surface-colour**: dark mode fine-tuning, brand colour adjustments
 
 ---
@@ -99,6 +99,20 @@ This is a dependency order, not a strict sequence. Later skills reference earlie
 | Design system audit | system-tokens | All skills |
 | Visual polish | surface-details | surface-motion, surface-colour |
 | Feedback (toast/inline/banner) | system-patterns | surface-details, surface-motion |
+
+---
+
+## Orchestration Rules
+
+Use one lead skill by default. Pull in supporting skills only when they own a decision that changes the output.
+
+For broad tasks, state the route before acting:
+
+```text
+Route: lead with system-patterns for layout, then check system-components for APIs and surface-details for platform polish.
+```
+
+Stop when the relevant domains are covered. Do not run the whole suite unless the user asks for a full design-system audit or an accessibility review across an entire interface.
 
 ---
 

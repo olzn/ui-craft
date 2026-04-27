@@ -18,18 +18,52 @@ Use the narrowest relevant skill first. Do not load or apply every domain skill 
 For new systems or new features, start with structure before surface:
 
 ```text
-system-naming -> system-tokens -> system-components -> system-patterns -> surface-copy -> surface skills
+system-naming -> system-tokens -> surface-typography/surface-colour -> system-components -> system-patterns -> surface-copy -> surface-details/surface-interaction/surface-motion
 ```
 
 For existing UI polish, start with the surface:
 
 ```text
-surface-details -> surface-copy -> surface-motion -> surface-typography -> surface-colour -> system-components
+surface-details -> surface-copy -> surface-interaction -> surface-motion -> surface-typography -> surface-colour -> system-components
 ```
 
 Use references only when needed. `references/` files contain deeper recipes and audits; they are not required for every task.
 
 Keep learnings useful. When a reusable project quirk or library behaviour appears, append a short finding to the relevant `learnings.md`.
+
+---
+
+## Orchestration Protocol
+
+When invoked directly, act as a router before acting as a specialist.
+
+1. Classify the task: build, review, polish, design-system, naming, copy, motion, accessibility, or mixed.
+2. Choose exactly one lead skill from the table below.
+3. Load or apply the lead skill first.
+4. Add supporting skills only when the task includes decisions owned by those skills.
+5. For broad UI work, state the route in one short sentence before acting.
+6. Stop once the relevant domains have been covered. Do not inspect the whole suite by default.
+
+Use a supporting skill only when it changes the work:
+
+- Use `system-naming` when labels, commands, component names, prop names, token names, icons, or terminology are being chosen or audited.
+- Use `system-tokens` when values need to become reusable scales, semantic tokens, or theme mappings.
+- Use `system-components` when reusable APIs, variants, states, composition, or component contracts are involved.
+- Use `system-patterns` when multiple components form a workflow such as a form, table, navigation, feedback system, or page layout.
+- Use `surface-copy` when surrounding explanatory copy, empty states, errors, onboarding, tooltips, or UX prose need writing.
+- Use `surface-interaction` when deciding whether movement, gestures, spatial logic, or frequency are appropriate.
+- Use `surface-motion` when implementing easing, timing, transitions, entrances, exits, or animated state changes.
+- Use `surface-typography` when type scale, font loading, rhythm, wrapping, or rendering are material to the result.
+- Use `surface-colour` when contrast, palette, dark mode, status colour, or colour-blind-safe states are material to the result.
+- Use `surface-details` when browser quirks, focus, touch, scroll, safe areas, layout shift, or final polish are material to the result.
+
+For a broad prompt, use this route summary format:
+
+```text
+Route: lead with system-patterns for layout, then check system-components for APIs and surface-details for platform polish.
+```
+
+Skip the route summary when the user names a specific skill or the task is small and obvious.
 
 ---
 

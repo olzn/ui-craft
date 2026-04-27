@@ -98,16 +98,18 @@ Use the narrowest relevant skill first. If you need a button API, start with `sy
 Start with structure, then refine the surface. For new work, the usual order is:
 
 ```text
-system-naming -> system-tokens -> system-components -> system-patterns -> surface-copy -> surface skills
+system-naming -> system-tokens -> surface-typography/surface-colour -> system-components -> system-patterns -> surface-copy -> surface-details/surface-interaction/surface-motion
 ```
 
 For existing UI, reverse the order when the structure already exists:
 
 ```text
-surface-details -> surface-copy -> surface-motion -> surface-typography -> surface-colour -> system-components
+surface-details -> surface-copy -> surface-interaction -> surface-motion -> surface-typography -> surface-colour -> system-components
 ```
 
 Do not invoke every skill by default. The suite works best when the lead skill is clear and supporting skills are pulled in only for their specific domain.
+
+When using `ui-craft`, expect a compact route: classify the task, choose one lead skill, add supporting skills only for owned decisions, then stop once the relevant domains are covered.
 
 Use `surface/composition.md` for multi-skill tasks. It defines common sequences for new project setup, component work, page work, audits, accessibility reviews, and visual polish passes.
 
