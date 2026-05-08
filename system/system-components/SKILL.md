@@ -1,17 +1,17 @@
 ---
 name: system-components
-description: Build reusable, consistent UI components with well-defined APIs and complete state coverage. Use when creating or reviewing components, props, variants, configuration vs composition, compound components, controlled/uncontrolled patterns, component states, CVA, asChild/render delegation, ref forwarding, icon system conventions, or "this component API feels wrong". Based on Radix, Base UI, and shadcn/ui. Does NOT cover broad component terminology, icon names, button labels, feature names, or product names (use system-naming). Does NOT cover token architecture or theming (use system-tokens), composite patterns such as forms/navigation/tables (use system-patterns), or visual design, animation, and platform quirks (use the relevant surface skill).
+description: Build reusable, consistent UI components with well-defined APIs and complete state coverage. Use when creating or reviewing components, props, variants, configuration vs composition, compound components, controlled/uncontrolled patterns, component states, CVA, asChild/render delegation, ref forwarding, icon system conventions, or "this component API feels wrong". Uses Radix, Base UI, and shadcn/ui as examples where that stack is already appropriate; do not add those dependencies automatically. Does NOT cover broad component terminology, icon names, button labels, feature names, or product names (use system-naming). Does NOT cover token architecture or theming (use system-tokens), composite patterns such as forms/navigation/tables (use system-patterns), or visual design, animation, and platform quirks (use the relevant surface skill).
 ---
 
 # Components
 
 How to build reusable UI components with consistent APIs and complete state coverage. system-tokens provides the values. This skill provides the structure.
 
-Based on the component patterns of [Radix](https://www.radix-ui.com/primitives), [Base UI](https://base-ui.com), and [shadcn/ui](https://ui.shadcn.com).
+Based on the component patterns of [Radix](https://www.radix-ui.com/primitives), [Base UI](https://base-ui.com), and [shadcn/ui](https://ui.shadcn.com). Treat these as preferred examples when a project already uses that stack, not as automatic dependency choices for every web interface.
 
-For the shared design philosophy, see `design-philosophy.md`.
+For the shared design philosophy, see `references/design-philosophy.md`.
 
-**Apply this whenever creating or reviewing a component.** For broad component, icon, and user-facing label terminology, use system-naming. For accessibility across all skills, see `accessibility.md`. For multi-skill task sequencing, see `composition.md`.
+**Apply this whenever creating or reviewing a component.** For broad component, icon, and user-facing label terminology, use system-naming. For accessibility across all skills, see `references/accessibility.md`. For multi-skill task sequencing, see `references/composition.md`.
 
 For API polish, safe button defaults, error boundary strategy, promotion rules, and file shape guidance, read `references/api-polish.md`.
 
@@ -44,7 +44,7 @@ The same concept uses the same prop name on every component in the system.
 
 ## Variant System (CVA)
 
-Use [class-variance-authority](https://cva.style) for type-safe variant maps in Tailwind projects.
+Use [class-variance-authority](https://cva.style) for type-safe variant maps in Tailwind projects that already accept CVA. In non-Tailwind or dependency-sensitive projects, keep the same finite-variant model with the project's existing styling mechanism.
 
 ```tsx
 import { cva, type VariantProps } from "class-variance-authority";
@@ -222,6 +222,12 @@ Complex data components distinguish empty, loading, and error states. They may a
 
 List every state a component can be in before writing code. If a state is missing from the design, ask for it. Shipping without disabled, empty, or error states is shipping an incomplete component.
 
+### Quality contract
+
+Shared components must encode the complete state model for their role. Do not rely on each consumer to patch missing disabled, loading, focus, empty, error, or partial states. If the component cannot represent a state that the product can enter, extend the component contract before adding another one-off wrapper.
+
+Incomplete shared components create product entropy: every downstream workaround becomes another place for behaviour, copy, accessibility, and visual treatment to drift.
+
 ---
 
 ## Icon System
@@ -270,7 +276,7 @@ Headless libraries (Radix, React Aria, Ariakit, Base UI) handle most of this. Wh
 
 ## Tools
 
-| Tool | Purpose | Install |
+| Tool | Purpose | Install if adopted |
 |---|---|---|
 | [CVA](https://cva.style) | Type-safe variant maps | `npm i class-variance-authority` |
 | [@radix-ui/react-slot](https://www.radix-ui.com/primitives/utilities/slot) | `Slot` for `asChild` delegation | `npm i @radix-ui/react-slot` |
@@ -301,6 +307,7 @@ export function cn(...inputs: ClassValue[]) {
 9. **Generic spinners for loading.** Skeletons should mirror actual content structure.
 10. **Button without explicit type.** Defaults to submit inside forms.
 11. **Empty state used for errors.** Empty and failed are different product states.
+12. **Incomplete shared state model.** Consumers have to patch missing states with one-off wrappers.
 
 ---
 
@@ -334,6 +341,7 @@ export function cn(...inputs: ClassValue[]) {
 - Every data component: empty, loading, error, partial, complete
 - Skeletons mirror actual content structure
 - Disabled states have inline explanation
+- Shared components encode states centrally, not through downstream one-off fixes
 
 ### Icons
 - Single icon library throughout
@@ -345,4 +353,4 @@ export function cn(...inputs: ClassValue[]) {
 
 ## Learning from Usage
 
-After completing a component task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Consult `learnings.md` before starting any new task.
+After completing a component task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Installed learnings are local runtime notes preserved across suite updates; consult `learnings.md` before starting any new task.

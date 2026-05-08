@@ -1,6 +1,6 @@
 ---
 name: system-patterns
-description: Architect composite UI patterns that assemble components into coherent features. Use when building forms, validation, error handling, multi-step flows, navigation, breadcrumbs, active states, deep linking, tables, lists, cards, sorting, filtering, pagination, empty/loading/error states, feedback systems, confirmations, progress, optimistic updates, page layouts, sidebar+main structures, dashboard grids, responsive stacking, or content density. Also triggers for "how should this form validate", "where should errors show", "toast or inline", "how to structure this dashboard", "mobile navigation", or how components work together. Does NOT cover button labels, command names, feature/product names, or UI terminology (use system-naming), component APIs (use system-components), token architecture (use system-tokens), animation values (use surface-motion), or platform quirks (use surface-details).
+description: Architect composite UI patterns that assemble components into coherent features. Use when building forms, validation, error handling, multi-step flows, navigation, breadcrumbs, active states, deep linking, tables, lists, cards, sorting, filtering, pagination, empty/loading/error states, feedback systems, confirmations, progress, optimistic updates, page layouts, sidebar+main structures, dashboard grids, responsive stacking, or content density. Also triggers for "how should this form validate", "where should errors show", "toast or inline", "how to structure this dashboard", "mobile navigation", workflow coherence, complexity cost, feature accretion, or how components work together. Does NOT cover button labels, command names, feature/product names, or UI terminology (use system-naming), component APIs (use system-components), token architecture (use system-tokens), animation values (use surface-motion), or platform quirks (use surface-details).
 ---
 
 # Patterns
@@ -9,9 +9,26 @@ Composite UI patterns that assemble components into features. system-components 
 
 This is the layer between "I have well-structured components" and "I have a well-structured product." It prevents the common failure mode of correct components wired into incoherent features.
 
-For the shared design philosophy, see `design-philosophy.md`.
+For the shared design philosophy, see `references/design-philosophy.md`.
 
-**Apply this when composing components into larger features or building pages.** For button labels, feature names, product names, and shared terminology, use system-naming. For accessibility across all skills, see `accessibility.md`. For multi-skill task sequencing, see `composition.md`.
+**Apply this when composing components into larger features or building pages.** For button labels, feature names, product names, and shared terminology, use system-naming. For accessibility across all skills, see `references/accessibility.md`. For multi-skill task sequencing, see `references/composition.md`.
+
+---
+
+## Coherence and Complexity
+
+Good product patterns preserve coherence as features accumulate. Every addition creates new relationships between states, transitions, permissions, errors, empty cases, navigation, and feedback. Treat that complexity as a cost.
+
+Before adding or changing a feature, identify:
+
+- The existing pattern it extends.
+- The user task it improves.
+- The states and transitions it adds.
+- The complexity it removes, hides, or justifies.
+
+If a feature duplicates an existing pattern, contradicts established behaviour, or adds states without a recovery path, stop and simplify the pattern before building more UI.
+
+Prefer removing, merging, or progressively disclosing secondary controls over adding another visible branch to the workflow. A feature that is technically correct but makes the product harder to hold in someone's head is a pattern failure.
 
 ---
 
@@ -286,23 +303,32 @@ If a modal represents a distinct piece of content (a preview, an item detail), r
 
 ## Anti-Patterns
 
-1. **Validate on blur before interaction.** Showing an error on a field the user hasn't touched yet.
-2. **Clear form on server error.** The user loses all entered data and has to start over.
-3. **Toast for important outcomes.** Success, error, and completion feedback must be inline.
-4. **Confirmation for reversible actions.** If it can be undone, let the user act and offer undo.
-5. **Hamburger for primary navigation.** Hiding critical navigation behind a menu on mobile when bottom tabs or icon sidebar would work.
-6. **Colour-only active state.** Navigation active state using only colour. Must include weight, indicator, or icon change.
-7. **Unresponsive tables.** A wide table that overflows on mobile with no scroll, card transformation, or column prioritisation.
-8. **Generic spinner for loading data.** Use skeleton screens that mirror the actual content structure.
-9. **Full-width text on large screens.** Prose that spans 1400px is unreadable. Max-width your content.
-10. **Optimistic update on destructive actions.** Delete and financial operations should wait for server confirmation.
-11. **Modal for complex multi-step flows.** If it needs more than 2-3 steps or the full viewport, it should be a page.
-12. **Stacked modals.** A modal opening another modal. Use inline confirmation instead.
-13. **Search without keyboard navigation.** Arrow keys must navigate results. Enter must select.
+1. **Feature accretion without a pattern.** Adding a new branch that does not extend an existing workflow or replace a worse one.
+2. **Unpriced complexity.** Adding states, permissions, or transitions without deciding what complexity is removed, hidden, or justified.
+3. **Validate on blur before interaction.** Showing an error on a field the user hasn't touched yet.
+4. **Clear form on server error.** The user loses all entered data and has to start over.
+5. **Toast for important outcomes.** Success, error, and completion feedback must be inline.
+6. **Confirmation for reversible actions.** If it can be undone, let the user act and offer undo.
+7. **Hamburger for primary navigation.** Hiding critical navigation behind a menu on mobile when bottom tabs or icon sidebar would work.
+8. **Colour-only active state.** Navigation active state using only colour. Must include weight, indicator, or icon change.
+9. **Unresponsive tables.** A wide table that overflows on mobile with no scroll, card transformation, or column prioritisation.
+10. **Generic spinner for loading data.** Use skeleton screens that mirror the actual content structure.
+11. **Full-width text on large screens.** Prose that spans 1400px is unreadable. Max-width your content.
+12. **Optimistic update on destructive actions.** Delete and financial operations should wait for server confirmation.
+13. **Modal for complex multi-step flows.** If it needs more than 2-3 steps or the full viewport, it should be a page.
+14. **Stacked modals.** A modal opening another modal. Use inline confirmation instead.
+15. **Search without keyboard navigation.** Arrow keys must navigate results. Enter must select.
 
 ---
 
 ## Checklist
+
+### Coherence
+- New feature extends or replaces an existing pattern
+- User task improved by the change is explicit
+- Added states, transitions, permissions, errors, and empty cases are known
+- Complexity is removed, hidden, or justified
+- Existing behaviour is not contradicted without a migration path
 
 ### Forms
 - Validation timing is intentional (on submit, on blur, or real-time per field)
@@ -362,4 +388,4 @@ If a modal represents a distinct piece of content (a preview, an item detail), r
 
 ## Learning from Usage
 
-After completing a feature or page layout task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Consult `learnings.md` before starting any new task.
+After completing a feature or page layout task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Installed learnings are local runtime notes preserved across suite updates; consult `learnings.md` before starting any new task.

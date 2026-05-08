@@ -1,6 +1,6 @@
 ---
 name: ui-craft
-description: Coordinate the UI Craft skill suite. Use when a user asks for broad UI design, frontend quality, design-system work, interface review, visual polish, UX writing, or when it is unclear which domain skill should lead. Routes work across naming, tokens, components, patterns, copy, motion, interaction, typography, colour, and detail. Use for "make this UI better", "review this interface", "improve this design system", "which skill applies", or multi-skill UI tasks. This is a coordinator, not a replacement for the focused domain skills.
+description: Coordinate the UI Craft skill suite. Use when a user asks for broad UI design, frontend quality, design-system work, interface review, visual polish, UX writing, or when it is unclear which domain skill should lead. Also use for quality, craft, papercut, entropy, and "why does this feel bad?" prompts. Routes work across naming, tokens, components, patterns, copy, motion, interaction, typography, colour, and detail. Use for "make this UI better", "review this interface", "improve this design system", "which skill applies", or multi-skill UI tasks. This is a coordinator, not a replacement for the focused domain skills.
 ---
 
 # UI Craft
@@ -27,9 +27,9 @@ For existing UI polish, start with the surface:
 surface-details -> surface-copy -> surface-interaction -> surface-motion -> surface-typography -> surface-colour -> system-components
 ```
 
-Use references only when needed. `references/` files contain deeper recipes and audits; they are not required for every task.
+Use shared references only when they change the routing or judgement. Use `references/quality.md` for quality, craft, papercut, entropy, and "why does this feel bad?" prompts. Use `references/` files inside skills for deeper recipes and audits; they are not required for every task.
 
-Keep learnings useful. When a reusable project quirk or library behaviour appears, append a short finding to the relevant `learnings.md`.
+Keep learnings useful. When a reusable project quirk or library behaviour appears, append a short finding to the relevant `learnings.md`. Installed learnings are local runtime notes and the installer preserves them across updates.
 
 ---
 
@@ -37,7 +37,7 @@ Keep learnings useful. When a reusable project quirk or library behaviour appear
 
 When invoked directly, act as a router before acting as a specialist.
 
-1. Classify the task: build, review, polish, design-system, naming, copy, motion, accessibility, or mixed.
+1. Classify the task: build, review, polish, quality, design-system, naming, copy, motion, accessibility, or mixed.
 2. Choose exactly one lead skill from the table below.
 3. Load or apply the lead skill first.
 4. Add supporting skills only when the task includes decisions owned by those skills.
@@ -80,7 +80,8 @@ Skip the route summary when the user names a specific skill or the task is small
 | Implement easing, timing, transitions, entrances, exits, or icon swaps | `surface-motion` | `surface-interaction`, `surface-details` |
 | Set up type scale, font loading, wrapping, rhythm, or OpenType features | `surface-typography` | `system-tokens` |
 | Build palettes, contrast, dark mode, or colour-blind-safe states | `surface-colour` | `system-tokens` |
-| Polish browser details, focus, touch, inputs, scroll, or visual finish | `surface-details` | `surface-motion`, `accessibility.md` |
+| Polish browser details, focus, touch, inputs, scroll, or visual finish | `surface-details` | `surface-motion`, `references/accessibility.md` |
+| Review quality, craft, papercuts, entropy, or "why this feels bad" | `references/quality.md` | `system-patterns`, `system-components`, `surface-details` |
 
 ---
 
@@ -109,6 +110,8 @@ If the user names a specific domain skill, use that skill directly.
 
 If the user asks a broad UI question, choose a lead skill and name the supporting skills you will check.
 
+If the user asks about quality, craft, papercuts, entropy, or why an interface feels bad, read `references/quality.md`, lead with the Quality Pass in `references/composition.md`, and route each issue to the smallest owning skill set.
+
 If the user asks for a review, lead with findings and cite file/line references where possible. Prioritise bugs, accessibility failures, behavioural regressions, and missing states before subjective taste.
 
 If the user asks to build or change UI, implement the relevant guidance as working constraints, not as a long explanation to the user.
@@ -133,6 +136,10 @@ For full flows, sequence them: `system-naming` establishes the vocabulary and ac
 
 **"Make this UI better"**: `surface-details` lead; check `surface-motion`, `surface-typography`, and `surface-colour`.
 
+**"Why does this feel low quality?"**: use `references/quality.md`, then lead with `system-patterns` for coherence; check `system-components` and `surface-details`.
+
+**"Fix the papercuts"**: use `references/quality.md`, then lead with `surface-details`; check `system-patterns` when papercuts come from workflow complexity.
+
 **"Build a reusable Button"**: `system-components` lead; check `system-naming`, `system-tokens`, `surface-motion`, and `surface-details`.
 
 **"Design this settings page"**: `system-patterns` lead; check `system-components`, `system-naming`, and `surface-details`.
@@ -143,4 +150,4 @@ For full flows, sequence them: `system-naming` establishes the vocabulary and ac
 
 **"Audit the design system"**: `system-tokens` lead; check `system-naming`, `system-components`, `surface-colour`, and `surface-typography`.
 
-**"This interface is inaccessible"**: use `accessibility.md` as the cross-suite checklist, then apply the owning domain skill for each issue.
+**"This interface is inaccessible"**: use `references/accessibility.md` as the cross-suite checklist, then apply the owning domain skill for each issue.

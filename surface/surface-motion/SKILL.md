@@ -5,9 +5,9 @@ description: Implement animation and transitions with precise easing, timing, an
 
 # Motion
 
-Animation implementation for web interfaces. This skill provides the exact values, properties, and code patterns for making things move well. It is the implementation layer of the Fluidity pillar from the shared `design-philosophy.md`. Incorporates the [12 Principles of Animation](https://www.raphaelsalaja.com/library/12-principles-of-animation) adapted for UI by Raphael Salaja and the practical animation patterns of [Emil Kowalski](https://emilkowal.ski).
+Animation implementation for web interfaces. This skill provides the exact values, properties, and code patterns for making things move well. It is the implementation layer of the Fluidity pillar from the shared `references/design-philosophy.md`. Incorporates the [12 Principles of Animation](https://www.raphaelsalaja.com/library/12-principles-of-animation) adapted for UI by Raphael Salaja and the practical animation patterns of [Emil Kowalski](https://emilkowal.ski).
 
-**surface-interaction decides whether and why. This skill decides how.** For accessibility across all skills, see `accessibility.md`. For multi-skill task sequencing, see `composition.md`.
+**surface-interaction decides whether and why. This skill decides how.** For accessibility across all skills, see `references/accessibility.md`. For multi-skill task sequencing, see `references/composition.md`.
 
 For animation polish reviews, paired element timing, CSS-only icon swaps, `AnimatePresence initial={false}`, and frame-by-frame debugging, read `references/polish-recipes.md`.
 
@@ -92,9 +92,15 @@ Larger elements should animate slightly slower than smaller ones. A full-screen 
 
 ## Properties
 
-### Prefer `transform`, `opacity`, and `filter`
+### Prefer compositor-friendly properties
 
-`transform` and `opacity` are composited by the GPU and do not trigger layout or paint. `filter` (particularly `blur()` and `brightness()`) is also compositor-friendly in modern browsers, though more expensive than the other two. Animating anything else (`width`, `height`, `top`, `left`, `margin`, `padding`, `border`, `background-color`, `box-shadow`) causes layout recalculation and paint, which produces jank on lower-end devices.
+Prefer `transform` and `opacity`. They are the safest defaults because browsers can usually composite them without recalculating layout or repainting the element's contents.
+
+Treat other properties by cost:
+
+- **Layout-triggering:** `width`, `height`, `top`, `left`, `margin`, `padding`, and similar geometry changes can recalculate layout.
+- **Paint-triggering:** `background-color`, `box-shadow`, `border-color`, and many visual effects may avoid layout but still repaint.
+- **Expensive compositor effects:** `filter` and `backdrop-filter` can be useful, but blur in particular is costly and must be tested on target hardware.
 
 **How to achieve common effects with performant properties:**
 
@@ -103,7 +109,7 @@ Larger elements should animate slightly slower than smaller ones. A full-screen 
 | Element grows/shrinks | `transform: scale()` |
 | Element moves | `transform: translate()` |
 | Element appears/disappears | `opacity: 0` to `1` (with `transform: scale()` or `translateY()`) |
-| Soft entrance/exit | `filter: blur()` combined with opacity (test on low-end devices) |
+| Soft entrance/exit | Small `filter: blur()` combined with opacity, after testing on target hardware |
 | Background colour changes | Layer a pseudo-element and animate its `opacity` |
 | Width/height changes | Animate `transform: scaleX()` / `scaleY()` on a wrapper |
 
@@ -111,7 +117,7 @@ Larger elements should animate slightly slower than smaller ones. A full-screen 
 
 ### Hardware acceleration
 
-When the main thread is busy (page navigation, heavy rendering), JavaScript-driven animations (Motion/requestAnimationFrame) will drop frames. CSS animations and the Web Animations API (WAAPI) run on the compositor thread and remain smooth regardless of main thread load. If an animation stutters during navigation or data loading, move it from Motion to CSS or WAAPI.
+When the main thread is busy (page navigation, heavy rendering), JavaScript-driven animations such as Motion or `requestAnimationFrame` can drop frames. CSS transitions and WAAPI can run some compositor-friendly animations away from the main thread, but only for properties the browser can composite. If an animation stutters during navigation or data loading, reduce work first, then consider moving simple `transform`/`opacity` motion from JavaScript to CSS or WAAPI and profile again.
 
 ### The `transition: all` ban
 
@@ -449,7 +455,7 @@ Use these before rolling your own:
 1. **`transition: all`.** Explicitly list animated properties. `all` triggers unintended property animations.
 2. **Scaling from 0.** Minimum entry scale is 0.85. Zero-to-one looks like a glitch.
 3. **Centred transform-origin on triggered elements.** Overlays must grow from their trigger's position.
-4. **Animating layout properties.** `width`, `height`, `top`, `left` cause jank. Use `transform`, `opacity`, and `filter` only.
+4. **Animating layout properties.** `width`, `height`, `top`, and `left` often cause jank. Prefer `transform` and `opacity`; use paint-heavy properties only when the effect is worth the cost and has been tested.
 5. **Exit slower than entrance.** Exits should be ~70% of entrance duration.
 6. **Ignoring `prefers-reduced-motion`.** Non-negotiable accessibility requirement.
 7. **Linear easing.** Never for UI transitions. It looks robotic.
@@ -468,7 +474,9 @@ Use these before rolling your own:
 - Micro-interactions are under 150ms
 - Entrances/exits are under 300ms
 - No animation exceeds 400ms
-- Only `transform`, `opacity`, and `filter` are animated (no layout properties)
+- Layout-triggering properties are avoided for routine motion
+- `transform` and `opacity` are the default animated properties
+- `filter` and paint-heavy effects are used sparingly and tested on target hardware
 - No `transition: all` anywhere
 - Entry scale minimum is 0.85
 - Press feedback scale is 0.96-0.98
@@ -494,4 +502,4 @@ Use these before rolling your own:
 
 ## Learning from Usage
 
-After completing a motion task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Consult `learnings.md` before starting any new task.
+After completing a motion task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Installed learnings are local runtime notes preserved across suite updates; consult `learnings.md` before starting any new task.

@@ -11,7 +11,7 @@ Based on the interaction thinking of [Rauno Freiberg](https://rauno.me/craft/int
 
 **This skill decides whether and why. surface-motion decides how.**
 
-For the shared design philosophy behind these decisions, see `design-philosophy.md`. For multi-skill task sequencing, see `composition.md`.
+For the shared design philosophy behind these decisions, see `references/design-philosophy.md`. For multi-skill task sequencing, see `references/composition.md`.
 
 ---
 
@@ -269,4 +269,4 @@ These heuristics from Laws of UX inform interaction design decisions:
 
 ## Learning from Usage
 
-After completing an interaction design task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Consult `learnings.md` before starting any new task.
+After completing an interaction design task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Installed learnings are local runtime notes preserved across suite updates; consult `learnings.md` before starting any new task.

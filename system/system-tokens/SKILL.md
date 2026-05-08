@@ -9,9 +9,9 @@ Design token architecture and foundation scales. Tokens are the distribution lay
 
 Based on the [Design System Checklist](https://www.designsystemchecklist.com) and the token patterns of Tailwind, Radix Themes, and Open Props.
 
-For the shared design philosophy, see `design-philosophy.md`.
+For the shared design philosophy, see `references/design-philosophy.md`.
 
-**Apply this when setting up a project's design foundations or auditing token consistency.** For broad naming and terminology decisions, use system-naming. For multi-skill task sequencing, see `composition.md`.
+**Apply this when setting up a project's design foundations or auditing token consistency.** For broad naming and terminology decisions, use system-naming. For multi-skill task sequencing, see `references/composition.md`.
 
 ---
 
@@ -263,4 +263,4 @@ For colour-specific theming decisions (dark mode surface values, brand colour ad
 
 ## Learning from Usage
 
-After completing a token or scale setup task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Consult `learnings.md` before starting any new task.
+After completing a token or scale setup task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Installed learnings are local runtime notes preserved across suite updates; consult `learnings.md` before starting any new task.

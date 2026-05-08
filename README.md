@@ -8,7 +8,7 @@ It contains:
 - **surface**: how interfaces look, read, move, respond, adapt to platform constraints, and feel in use.
 - **system**: what interface parts are made from, what they are called, and how they fit into a reusable system.
 
-The suite is designed for Codex, Claude Code, and other agents that can read `SKILL.md` files with YAML frontmatter.
+The suite is designed for Codex, Claude Code, and other agents that can read `SKILL.md` files with YAML frontmatter. Examples often use React, Tailwind, Radix, Base UI, shadcn/ui, and Motion because those stacks are common in agent-built web UI; treat them as examples or preferred defaults when already present, not as automatic dependencies.
 
 ---
 
@@ -24,6 +24,7 @@ ui-craft/
 │   ├── accessibility.md
 │   ├── composition.md
 │   ├── design-philosophy.md
+│   ├── quality.md
 │   ├── surface-motion/
 │   ├── surface-interaction/
 │   ├── surface-typography/
@@ -40,9 +41,9 @@ ui-craft/
 
 Each skill folder contains a `SKILL.md`. Some skills also include:
 
-- `references/`: detailed guidance loaded only when needed.
+- `references/`: detailed guidance loaded only when needed. Shared references are copied into each skill that uses them so installed skills are self-contained.
 - `agents/openai.yaml`: UI metadata for OpenAI skill clients.
-- `learnings.md`: accumulated edge cases and practical findings.
+- `learnings.md`: accumulated local edge cases and practical findings. The installer preserves installed learnings across updates.
 
 ---
 
@@ -111,9 +112,11 @@ Do not invoke every skill by default. The suite works best when the lead skill i
 
 When using `ui-craft`, expect a compact route: classify the task, choose one lead skill, add supporting skills only for owned decisions, then stop once the relevant domains are covered.
 
-Use `surface/composition.md` for multi-skill tasks. It defines common sequences for new project setup, component work, page work, audits, accessibility reviews, and visual polish passes.
+Use `surface/composition.md` for repository-level reading, or the local `references/composition.md` copy inside an installed skill. It defines common sequences for new project setup, component work, page work, audits, accessibility reviews, visual polish passes, and quality passes.
 
-Keep `learnings.md` useful. When a project-specific browser quirk, library behaviour, or implementation edge case appears, add a short finding to the relevant skill's `learnings.md` so the suite improves through use.
+Use `surface/quality.md` for repository-level reading, or the local `references/quality.md` copy inside an installed skill, for quality, craft, papercut, entropy, and "why does this feel bad?" prompts. It maps quality signals to existing skills rather than creating a separate quality skill.
+
+Keep `learnings.md` useful. When a project-specific browser quirk, library behaviour, or implementation edge case appears, add a short finding to the relevant installed skill's `learnings.md`. These notes are local runtime learnings and are preserved by the installer.
 
 Treat references as optional depth. The `references/` files are for detailed recipes and audits, not material that needs to be loaded for every task.
 
@@ -132,7 +135,8 @@ Treat references as optional depth. The `references/` files are for detailed rec
 | Implement easing, timing, transitions, entrances, exits, or icon swaps | `surface-motion` | `surface-interaction`, `surface-details` |
 | Set up type scale, font loading, wrapping, rhythm, or OpenType features | `surface-typography` | `system-tokens` |
 | Build palettes, contrast, dark mode, or colour-blind-safe states | `surface-colour` | `system-tokens` |
-| Polish browser details, focus, touch, inputs, scroll, or visual finish | `surface-details` | `surface-motion`, `accessibility.md` |
+| Polish browser details, focus, touch, inputs, scroll, or visual finish | `surface-details` | `surface-motion`, `references/accessibility.md` |
+| Review quality, craft, papercuts, entropy, or "why this feels bad" | `references/quality.md` | `system-patterns`, `system-components`, `surface-details` |
 
 ---
 
@@ -198,15 +202,7 @@ sh install.sh
 
 ## Manual Installation
 
-Copy the shared surface references into your skills directory:
-
-```text
-design-philosophy.md
-accessibility.md
-composition.md
-```
-
-Then copy each skill folder into the same directory:
+Copy each skill folder into the same skills directory. The needed shared references are already duplicated inside each skill's `references/` folder:
 
 ```text
 ui-craft/
@@ -222,7 +218,24 @@ system-components/
 system-patterns/
 ```
 
-The shared references are deliberately flat because individual skills point to them by filename.
+For backwards compatibility with older installed skills, you may also copy the flat shared reference files into the skills directory:
+
+```text
+design-philosophy.md
+accessibility.md
+composition.md
+quality.md
+```
+
+---
+
+## Validation
+
+Run the dependency-free validation harness before publishing or installing from a local clone:
+
+```sh
+sh scripts/validate.sh
+```
 
 ---
 
@@ -233,12 +246,13 @@ Read:
 - [surface/README.md](surface/README.md) for the experiential surface layer.
 - [system/README.md](system/README.md) for the structural system layer.
 - [surface/composition.md](surface/composition.md) for sequencing and lead-skill selection.
+- [surface/quality.md](surface/quality.md) for cross-suite quality and craft reviews.
 
 ---
 
 ## Attribution
 
-This suite distils ideas from many designers, engineers, and design-system practitioners, including Benji Taylor, Rauno Freiberg, Emil Kowalski, Jakub Krolikowski, Derek Briggs, Raphael Salaja, Laws of UX, NN/g, Polaris, Intuit, Vodafone, and others cited inside the relevant skill documents.
+This suite distils ideas from many designers, engineers, and design-system practitioners, including Anthony Hobday, Benji Taylor, Rauno Freiberg, Emil Kowalski, Jakub Krolikowski, Derek Briggs, Raphael Salaja, Laws of UX, NN/g, Polaris, Intuit, Vodafone, and others cited inside the relevant skill documents.
 
 All original ideas and guidelines belong to their respective authors. This repo packages those influences as agent skills for practical interface work.
 

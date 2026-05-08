@@ -1,13 +1,13 @@
 ---
 name: surface-details
-description: Catch platform-specific implementation details and visual polish that make web interfaces feel professional. Use when building forms, inputs, toggles, buttons, dropdowns, scroll behaviour, touch interfaces, focus handling, or production polish. Also triggers for bugs like iOS input zoom, sticky hover on mobile, dead zones, tooltip delay, menu prediction cones, unsafe hit areas, hydration flash, image outlines, optical alignment, shadow depth, nested radius, and performance micro-issues. Does NOT cover animation values or easing (use surface-motion), gesture decisions (use surface-interaction), type systems (use surface-typography), colour or contrast (use surface-colour), component APIs (use system-components), or token architecture (use system-tokens).
+description: Catch platform-specific implementation details and visual polish that make web interfaces feel professional. Use when building forms, inputs, toggles, buttons, dropdowns, scroll behaviour, touch interfaces, focus handling, or production polish. Also triggers for bugs like iOS input zoom, sticky hover on mobile, dead zones, tooltip delay, menu prediction cones, unsafe hit areas, hydration flash, image outlines, optical alignment, shadow depth, nested radius, quality-of-life papercuts, stable scroll position, cursor safety, and performance micro-issues. Does NOT cover animation values or easing (use surface-motion), gesture decisions (use surface-interaction), type systems (use surface-typography), colour or contrast (use surface-colour), component APIs (use system-components), or token architecture (use system-tokens).
 ---
 
 # Details
 
 Platform-specific implementation details and visual polish that separate professional web interfaces from amateur ones. Based on the [Web Interface Guidelines](https://interfaces.rauno.me) by Rauno Freiberg and the [interface details](https://jakub.kr/writing/details-that-make-interfaces-feel-better) work of Jakub Królikowski.
 
-This skill fires during construction of interactive elements and when debugging platform behaviour. It is deliberately granular: a list of specific, testable details. For design philosophy, see `design-philosophy.md`. For animation implementation, see **surface-motion**. For accessibility across all skills, see `accessibility.md`. For multi-skill task sequencing, see `composition.md`.
+This skill fires during construction of interactive elements and when debugging platform behaviour. It is deliberately granular: a list of specific, testable details. For design philosophy, see `references/design-philosophy.md`. For animation implementation, see **surface-motion**. For accessibility across all skills, see `references/accessibility.md`. For multi-skill task sequencing, see `references/composition.md`.
 
 For expanded hit areas, safe-area insets, hairline separators, text overflow, hydration flash, platform shortcut labels, and inert inactive regions, read `references/interface-polish.md`.
 
@@ -200,7 +200,7 @@ useEffect(() => {
 
 **Images use `<img>`, not `background-image`.** Screen readers can access `<img>` with `alt` text. `background-image` is invisible to assistive tech and cannot be right-click copied.
 
-**Decorative HTML gets `aria-label`.** Complex decorative elements built from HTML (illustrations, visual effects) should have `aria-label` on their container so screen readers announce the intent, not the raw DOM structure.
+**Decorative HTML is hidden from assistive tech.** Purely decorative DOM gets `aria-hidden="true"` and must not receive focus. Meaningful non-text illustrations or effects need an accessible name, caption, or nearby text that communicates their purpose.
 
 **Gradient text selection.**
 
@@ -242,6 +242,28 @@ Without this, selecting gradient text produces unreadable results.
 **Fill hover gaps with pseudo-elements.** When interactive elements have gaps between them (stacked toasts, spaced cards), hovering between items triggers a mouseout. Add `::after` pseudo-elements to fill the gaps so the hover state is maintained across the group.
 
 **Maintain pointer capture during drag.** When a user drags an element (a toast, a slider thumb, a card), set pointer capture on `pointerdown` so the element continues receiving events even if the pointer leaves its bounds. Without this, fast drags lose tracking when the cursor escapes the element.
+
+---
+
+## Quality-of-Life Papercuts
+
+These details rarely define the core feature, but they strongly affect whether the interface feels trustworthy.
+
+**Preserve entered data by default.** Unless the user explicitly discards it, information they entered should survive navigation, validation errors, modal closes, and temporary network failure. If preservation is not possible, warn before data is lost.
+
+**Maintain subjective scroll position.** When items are added to or removed from a list above the viewport, adjust scroll offset so visible items stay visually anchored. Do not make the user's place jump because data changed.
+
+**Keep edit-mode text stable.** When static text becomes editable, keep the text in the same visual position. The cursor, field padding, font size, and line-height should match the display state closely enough that the mode switch feels continuous.
+
+**Place popovers safely under the cursor.** If a click opens a new surface at the pointer location, do not put a destructive or risky action under the same cursor position. A double click or accidental second tap must not trigger a dangerous action.
+
+**Keep context menu actions stable.** Open context menus so actions appear in a predictable position relative to the cursor. Reposition for viewport bounds without changing the internal order or placing common actions in surprising locations.
+
+**Add coyote time to multi-key shortcuts.** For shortcuts that involve multiple keys, allow a small release grace period so the command is not cancelled the instant the user releases one key slightly early.
+
+**Snap movable elements to natural positions.** Carousels, horizontal stacks, drawers, sliders, and segmented draggable surfaces should settle into meaningful positions instead of stopping at arbitrary offsets.
+
+**Preview changes live.** When settings affect visible output, show the change immediately. If the target is off-screen or hidden, show a local preview near the controls.
 
 ---
 
@@ -309,6 +331,9 @@ For hover states, step up one level in the scale or slightly increase the opacit
 8. **Disabled button with tooltip.** Keyboard users will never see it.
 9. **Mismatched nested border radii.** Inner and outer radius are the same value instead of outer = inner + padding.
 10. **Geometric alignment with icons.** Equal padding on a button with an icon. The icon side needs less padding to look centred.
+11. **Losing entered data.** Navigation, validation, or network failure clears what the user already typed.
+12. **Jumping scroll position.** List mutations move visible content unexpectedly.
+13. **Risky action under cursor.** A newly opened menu places destructive action below the current pointer.
 
 ---
 
@@ -354,6 +379,16 @@ For hover states, step up one level in the scale or slightly increase the opacit
 - Hover gaps filled with pseudo-elements
 - Pointer capture set on drag start
 
+### Quality-of-Life
+- Entered data preserved unless explicitly discarded
+- List mutations maintain subjective scroll position
+- Edit-mode text stays visually stable
+- Risky actions are not placed under the current cursor
+- Context menu actions stay predictably positioned
+- Multi-key shortcuts include coyote time where useful
+- Movable elements snap to natural positions
+- Settings changes preview live or near the controls
+
 ### Tooltips
 - Initial delay before first tooltip (200-300ms)
 - Subsequent tooltips skip delay and animation
@@ -369,4 +404,4 @@ For hover states, step up one level in the scale or slightly increase the opacit
 
 ## Learning from Usage
 
-After completing a UI implementation task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Consult `learnings.md` before starting any new task.
+After completing a UI implementation task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Installed learnings are local runtime notes preserved across suite updates; consult `learnings.md` before starting any new task.

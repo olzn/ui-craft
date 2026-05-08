@@ -7,7 +7,7 @@ description: Build rigorous typography systems for web interfaces. Use this skil
 
 Typography systems for web interfaces. Type is the primary interface material. It carries meaning before colour, layout, or motion. Getting it right is structural, not decorative.
 
-Type supports the Simplicity pillar from `design-philosophy.md`: clear hierarchy guides the eye and reduces cognitive load. For colour systems, use **surface-colour**. For token architecture, use **system-tokens**. For multi-skill task sequencing, see `composition.md`.
+Type supports the Simplicity pillar from `references/design-philosophy.md`: clear hierarchy guides the eye and reduces cognitive load. For colour systems, use **surface-colour**. For token architecture, use **system-tokens**. For multi-skill task sequencing, see `references/composition.md`.
 
 ---
 
@@ -297,4 +297,4 @@ Use `text-wrap: balance` only for headings and short text blocks. Browsers limit
 
 ## Learning from Usage
 
-After completing a typography task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Consult `learnings.md` before starting any new task.
+After completing a typography task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Installed learnings are local runtime notes preserved across suite updates; consult `learnings.md` before starting any new task.

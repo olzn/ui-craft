@@ -25,6 +25,7 @@ surface/
 ├── design-philosophy.md        Shared reference. Not a skill.
 ├── accessibility.md            Accessibility cross-reference across all skills.
 ├── composition.md              Multi-skill task sequencing and lead-skill lookup.
+├── quality.md                  Cross-suite quality model and Quality Pass.
 ├── surface-motion/SKILL.md       How to animate.
 ├── surface-interaction/SKILL.md  Whether and why to animate.
 ├── surface-typography/SKILL.md         Typography systems.
@@ -43,13 +44,19 @@ Cross-reference guide for accessibility requirements scattered across all ten do
 
 ### composition.md
 
-How the ten domain skills work together. Ordered sequences for common tasks (new project setup, building a page, building a component, design system audit, visual polish pass), a lead-skill lookup table, and guidance on cross-skill boundaries.
+How the ten domain skills work together. Ordered sequences for common tasks (new project setup, building a page, building a component, design system audit, visual polish pass, Quality Pass), a lead-skill lookup table, and guidance on cross-skill boundaries.
 
 Based on the work of [Benji Taylor](https://benji.org/family-values) and [Rauno Freiberg](https://rauno.me).
 
+### quality.md
+
+Cross-suite model for quality, craft, papercuts, entropy, and "why does this feel bad?" prompts. Defines quality as the absence of avoidable user-facing problems, maps reliability, speed, clarity, efficacy, efficiency, and beauty to existing skills, and keeps quality work routed through the owning domains.
+
+Based on [Anthony Hobday's notes on software quality](https://anthonyhobday.com/blog/20260410).
+
 ### surface-motion
 
-Animation implementation. Easing curves (default + reference table, custom over built-in), springs vs bezier, duration limits and scaling, performant properties (`transform`, `opacity`, `filter`), hardware acceleration (WAAPI), scale ranges, `transform-origin` with Radix/Base UI CSS variables, exit patterns (subtle exits, AnimatePresence, `@starting-style`, `initial={false}` for default-state UI), staggered entrances, icon swap animation including CSS-only swaps, paired element timing, blur as transition mask, CSS transitions vs keyframes, scroll reveals (`whileInView`), animation principles for UI (anticipation, follow-through, secondary action, arcs), `prefers-reduced-motion`, debugging by frame review, and recommended libraries.
+Animation implementation. Easing curves (default + reference table, custom over built-in), springs vs bezier, duration limits and scaling, compositor-friendly properties (`transform`, `opacity`) with cautious use of paint-heavy effects and `filter`, hardware acceleration tradeoffs (CSS/WAAPI where profiling supports it), scale ranges, `transform-origin` with Radix/Base UI CSS variables, exit patterns (subtle exits, AnimatePresence, `@starting-style`, `initial={false}` for default-state UI), staggered entrances, icon swap animation including CSS-only swaps, paired element timing, blur as transition mask, CSS transitions vs keyframes, scroll reveals (`whileInView`), animation principles for UI (anticipation, follow-through, secondary action, arcs), `prefers-reduced-motion`, debugging by frame review, and recommended libraries.
 
 Sources: [Rauno Freiberg](https://rauno.me), [Jakub Królikowski](https://jakub.kr), [Raphael Salaja](https://www.raphaelsalaja.com/library/12-principles-of-animation), [Emil Kowalski](https://emilkowal.ski)
 
@@ -69,13 +76,13 @@ Interface copy and UX writing. Error message bodies, empty states, helper text, 
 
 ### surface-colour
 
-Colour systems built on OKLCH. Why HSL fails, perceptually uniform scale generation with chroma tapering, neutral scales, semantic colour mapping (`--color-{role}-{variant}`), light/dark theme construction (remap semantics, not primitives), accessible contrast (WCAG 2.x AA baseline + APCA secondary check), colour blindness (the "never colour alone" rule, testing for all three types), and wide gamut P3.
+Colour systems built on OKLCH. Why HSL fails, perceptually uniform scale generation with chroma tapering, neutral scales, semantic colour mapping (`--color-{role}-{variant}`), light/dark theme construction (remap semantics, not primitives), accessible contrast (WCAG 2.x AA baseline + APCA secondary check, with legal context verified separately), colour blindness (the "never colour alone" rule, testing for all three types), sRGB verification for critical colours, and careful use of wide gamut P3.
 
 Source: [OKLCH.fyi](https://oklch.fyi)
 
 ### surface-details
 
-Platform-specific implementation details and visual polish. Forms and inputs (labels, types, decorations, autocomplete), toggles and buttons (dead zones, expanded hit areas, `user-select`, `pointer-events`), dropdowns (`mousedown`, prediction cones), tooltips (delay skipping on subsequent tooltips), touch (`@media (hover: hover)`, iOS 16px zoom, auto-focus, video autoplay, tap highlight, `touch-action`, safe-area insets), scroll (smooth anchors, pause off-screen), performance (`blur()` cost, banding, GPU compositing, `will-change`, React refs for real-time values), accessibility micro-details (disabled tooltips, focus rings, `inert`, arrow keys, `aria-label`, gradient text selection), implementation patterns (optimistic updates, auth redirects, `::selection`, feedback placement, empty states, theme switching, hydration flash, `document.hidden` timer pause, hover gap-fill, pointer capture), and visual polish (concentric border radius, optical alignment, Derek Briggs natural shadow method, hairline separators, image outlines).
+Platform-specific implementation details and visual polish. Forms and inputs (labels, types, decorations, autocomplete), toggles and buttons (dead zones, expanded hit areas, `user-select`, `pointer-events`), dropdowns (`mousedown`, prediction cones), tooltips (delay skipping on subsequent tooltips), touch (`@media (hover: hover)`, iOS 16px zoom, auto-focus, video autoplay, tap highlight, `touch-action`, safe-area insets), scroll (smooth anchors, pause off-screen), performance (`blur()` cost, banding, GPU compositing, `will-change`, React refs for real-time values), accessibility micro-details (disabled tooltips, focus rings, `inert`, arrow keys, `aria-label`, decorative DOM hiding, gradient text selection), implementation patterns (optimistic updates, auth redirects, `::selection`, feedback placement, empty states, theme switching, hydration flash, `document.hidden` timer pause, hover gap-fill, pointer capture), quality-of-life papercuts (data preservation, scroll anchoring, cursor safety, shortcut grace periods, live previews), and visual polish (concentric border radius, optical alignment, Derek Briggs natural shadow method, hairline separators, image outlines).
 
 Sources: [Rauno Freiberg](https://interfaces.rauno.me), [Jakub Królikowski](https://jakub.kr/writing/details-that-make-interfaces-feel-better), [Emil Kowalski](https://emilkowal.ski/ui/building-a-toast-component), [Derek Briggs](https://x.com/PixelJanitor)
 
@@ -133,7 +140,7 @@ The structural counterpart to this suite. Covers naming, design tokens, componen
 
 ## Learnings
 
-Each skill includes a `learnings.md` convention. After completing a task with a skill, patterns, edge cases, and library quirks are appended to a `learnings.md` file in that skill's folder. The skill consults this file before starting new tasks.
+Each skill includes a `learnings.md` convention. After completing a task with a skill, patterns, edge cases, and library quirks are appended to a `learnings.md` file in that installed skill's folder. The installer preserves these local runtime notes across suite updates.
 
 ---
 

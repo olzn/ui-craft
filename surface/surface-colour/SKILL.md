@@ -5,9 +5,9 @@ description: Build perceptually uniform, accessible colour systems using OKLCH. 
 
 # Colour
 
-Perceptually uniform, accessible colour systems for web interfaces. Colour expresses the Delight pillar from `design-philosophy.md`, but only when built on solid perceptual foundations.
+Perceptually uniform, accessible colour systems for web interfaces. Colour expresses the Delight pillar from `references/design-philosophy.md`, but only when built on solid perceptual foundations.
 
-For token architecture and the three-layer model, see **system-tokens**. For colour naming and palette terminology, see **system-naming**. For theme switching implementation (disabling transitions), see **surface-details**. For accessibility across all skills, see `accessibility.md`. For multi-skill task sequencing, see `composition.md`.
+For token architecture and the three-layer model, see **system-tokens**. For colour naming and palette terminology, see **system-naming**. For theme switching implementation (disabling transitions), see **surface-details**. For accessibility across all skills, see `references/accessibility.md`. For multi-skill task sequencing, see `references/composition.md`.
 
 ---
 
@@ -34,7 +34,7 @@ oklch(L C H)
 
 ### Browser support
 
-All modern browsers (Chrome 111+, Safari 15.4+, Firefox 113+). Provide sRGB fallback for critical colours:
+OKLCH is supported in current versions of Chrome, Safari, Firefox, and Edge. Provide sRGB fallbacks for critical colours when supporting older browsers or constrained embedded webviews:
 
 ```css
 color: hsl(220, 60%, 50%);        /* fallback */
@@ -177,7 +177,7 @@ APCA values are directional. The absolute value is what matters for readability.
 
 ### Practical approach
 
-Design to WCAG 2.x AA as the baseline (it's the legal standard). Use APCA as a secondary check for edge cases where WCAG gives misleading results, particularly with mid-tone colours.
+Design to WCAG 2.x AA as the baseline for broad compatibility and common accessibility policy. Legal requirements vary by jurisdiction and product context; do not claim compliance from contrast alone. Use APCA as a secondary check for edge cases where WCAG gives misleading results, particularly with mid-tone colours.
 
 ### Tools
 
@@ -214,7 +214,7 @@ Chrome DevTools: Rendering panel > Emulate vision deficiencies. Check every colo
 
 Modern displays (Apple since ~2016, many recent Android and Windows) support P3, roughly 25% larger than sRGB.
 
-OKLCH handles gamut automatically. Values exceeding sRGB are clamped on sRGB displays and rendered fully on P3 displays. No `@media (color-gamut: p3)` query is needed.
+Browsers clamp out-of-gamut OKLCH values to the display gamut, but clamping can shift perceived hue and chroma. Verify critical colours in sRGB, especially text, borders, brand colours, and status indicators. Use `@media (color-gamut: p3)` only when you intentionally provide wider-gamut decorative variants.
 
 Use higher chroma for decorative/accent uses where gamut clamping is acceptable. Keep critical colours (text, borders, status indicators) within sRGB gamut to ensure consistency across all displays.
 
@@ -266,4 +266,4 @@ Use higher chroma for decorative/accent uses where gamut clamping is acceptable.
 
 ## Learning from Usage
 
-After completing a colour system task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Consult `learnings.md` before starting any new task.
+After completing a colour system task, review the output against the checklist. Append findings to `learnings.md` in this skill's folder. Installed learnings are local runtime notes preserved across suite updates; consult `learnings.md` before starting any new task.

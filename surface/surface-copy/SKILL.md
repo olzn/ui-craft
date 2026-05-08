@@ -9,7 +9,7 @@ Interface copy that helps people understand what is happening, what they can do 
 
 **system-naming names actions and concepts. surface-copy writes the surrounding language.** Keep this boundary clear. Do not override product action labels, command names, feature names, component names, token names, or glossary terms chosen by system-naming.
 
-For multi-skill task sequencing, see `composition.md`.
+For multi-skill task sequencing, see `references/composition.md`.
 
 ---
 
@@ -199,4 +199,4 @@ For small implementation tasks, apply the copy directly and summarise the change
 
 ## Learning from Usage
 
-After completing a copy task, review whether the wording stayed clear in the actual interface, matched established terminology, and survived layout or localisation constraints. Append durable findings to `learnings.md` in this skill's folder. Consult `learnings.md` before starting a new copy task.
+After completing a copy task, review whether the wording stayed clear in the actual interface, matched established terminology, and survived layout or localisation constraints. Append durable findings to `learnings.md` in this skill's folder. Installed learnings are local runtime notes preserved across suite updates; consult `learnings.md` before starting a new copy task.

@@ -7,16 +7,20 @@ REPO_TARBALL="https://github.com/olzn/ui-craft/archive/refs/heads/main.tar.gz"
 TARGET_DIR="${TARGET_DIR:-${CODEX_HOME:-$HOME/.codex}/skills}"
 SURFACE_SKILLS="surface-motion surface-interaction surface-typography surface-copy surface-colour surface-details"
 SYSTEM_SKILLS="system-tokens system-naming system-components system-patterns"
-SHARED_FILES="design-philosophy.md accessibility.md composition.md"
+SHARED_FILES="design-philosophy.md accessibility.md composition.md quality.md"
 COORDINATOR_SKILL="ui-craft"
 LEGACY_SKILLS="motion-craft interaction-craft type-craft copy-craft colour-craft detail-craft token-craft naming-craft component-craft pattern-craft surface-craft system-craft"
 
 SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" 2>/dev/null && pwd 2>/dev/null || echo "")"
 TMP_DIR=""
+PRESERVE_DIR=""
 
 cleanup() {
   if [ -n "$TMP_DIR" ] && [ -d "$TMP_DIR" ]; then
     rm -rf "$TMP_DIR"
+  fi
+  if [ -n "$PRESERVE_DIR" ] && [ -d "$PRESERVE_DIR" ]; then
+    rm -rf "$PRESERVE_DIR"
   fi
 }
 
@@ -42,9 +46,25 @@ copy_file() {
 copy_dir() {
   src="$1"
   dest="$2"
+  preserved_learnings=""
+
+  if [ -f "$dest/learnings.md" ]; then
+    if [ -z "$PRESERVE_DIR" ]; then
+      PRESERVE_DIR="${TMPDIR:-/tmp}/ui-craft-preserve-$$"
+      mkdir -p "$PRESERVE_DIR"
+    fi
+    preserved_learnings="$PRESERVE_DIR/$(basename "$dest").learnings.md"
+    cp "$dest/learnings.md" "$preserved_learnings"
+  fi
+
   rm -rf "$dest"
   mkdir -p "$(dirname "$dest")"
   cp -R "$src" "$dest"
+
+  if [ -n "$preserved_learnings" ] && [ -f "$preserved_learnings" ]; then
+    cp "$preserved_learnings" "$dest/learnings.md"
+  fi
+
   printf '  %s/\n' "$dest"
 }
 

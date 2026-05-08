@@ -190,4 +190,4 @@ The glossary is the source of truth. When you rename, propose a migration path f
 
 ## Learning from Usage
 
-After completing a naming task, review whether the chosen names held up across user-facing copy, design artefacts, and implementation. Append durable findings to `learnings.md` in this skill's folder. Consult `learnings.md` before starting any new naming task.
+After completing a naming task, review whether the chosen names held up across user-facing copy, design artefacts, and implementation. Append durable findings to `learnings.md` in this skill's folder. Installed learnings are local runtime notes preserved across suite updates; consult `learnings.md` before starting any new naming task.

@@ -28,7 +28,7 @@ system/
 └── system-patterns/SKILL.md     Composite UI patterns.
 ```
 
-For cross-suite references, see surface's `accessibility.md` (accessibility requirements across all ten domain skills) and `composition.md` (multi-skill task sequencing and lead-skill lookup).
+For repository-level cross-suite references, see surface's `accessibility.md` (accessibility requirements across all ten domain skills), `composition.md` (multi-skill task sequencing and lead-skill lookup), and `quality.md` (quality signals and the Quality Pass). Installed skills carry local `references/` copies of the shared files they use.
 
 ### system-tokens
 
@@ -46,15 +46,15 @@ Sources: [NN/g UI copy](https://www.nngroup.com/articles/ui-copy/), [Classnames]
 
 ### system-components
 
-How to build reusable UI components with consistent APIs and complete state coverage. Prop conventions (`variant`, `size`, `disabled`, `loading`, no `is` prefix, string unions over booleans), variant systems (CVA with `defaultVariants`), forwarding (`ref`, `className`, rest props, `displayName`, React 19 note), safe native defaults (`type="button"`), controlled and uncontrolled patterns, composition (when to configure vs compose, the 4-content-prop rule, compound component naming, slots, render delegation via `asChild`/`render`, balanced customisability), component state coverage (interactive: default, hover, focus, active, disabled, loading; content: empty, loading, error, partial, complete), error strategy, icon system (colour inheritance via `currentColor`, sizing from system-tokens scale, one library, accessibility), and tools (CVA, Radix Slot, Base UI, clsx + tailwind-merge).
+How to build reusable UI components with consistent APIs and complete state coverage. Prop conventions (`variant`, `size`, `disabled`, `loading`, no `is` prefix, string unions over booleans), variant systems (CVA with `defaultVariants`), forwarding (`ref`, `className`, rest props, `displayName`, React 19 note), safe native defaults (`type="button"`), controlled and uncontrolled patterns, composition (when to configure vs compose, the 4-content-prop rule, compound component naming, slots, render delegation via `asChild`/`render`, balanced customisability), component state coverage as a quality contract (interactive: default, hover, focus, active, disabled, loading; content: empty, loading, error, partial, complete), error strategy, icon system (colour inheritance via `currentColor`, sizing from system-tokens scale, one library, accessibility), and tools (CVA, Radix Slot, Base UI, clsx + tailwind-merge).
 
-Based on the component patterns of [Radix](https://www.radix-ui.com/primitives), [Base UI](https://base-ui.com), and [shadcn/ui](https://ui.shadcn.com).
+Based on the component patterns of [Radix](https://www.radix-ui.com/primitives), [Base UI](https://base-ui.com), and [shadcn/ui](https://ui.shadcn.com). These are examples and preferred defaults when already present, not automatic dependency choices.
 
 ### system-patterns
 
-Composite UI patterns that assemble components into coherent features. The layer between "I have well-structured components" and "I have a well-structured product."
+Composite UI patterns that assemble components into coherent features. The layer between "I have well-structured components" and "I have a well-structured product." Includes coherence and complexity checks for preventing feature accretion.
 
-Covers: form patterns (validation timing with three strategies, error display, field grouping, multi-step with progress and backward navigation, submit behaviour), navigation patterns (top/sidebar/bottom tabs, mobile adaptation, active states, breadcrumbs, deep linking), data display patterns (tables with sort/filter/pagination/selection/responsive, lists, cards), feedback patterns (toast vs inline vs banner decision table, confirmation dialogs, progress indicators, optimistic updates), layout patterns (sidebar+main, dashboard grids with auto-fill, content density levels, responsive strategies, max-width by content type), search patterns (keyboard shortcut, debounce, arrow key navigation, empty states, URL-reflected filters), and modal/dialog patterns (modal vs page vs sheet decisions, focus trapping and return, dismiss behaviour, scroll lock, mobile adaptation, stacking avoidance, deep linking).
+Covers: coherence and complexity checks, form patterns (validation timing with three strategies, error display, field grouping, multi-step with progress and backward navigation, submit behaviour), navigation patterns (top/sidebar/bottom tabs, mobile adaptation, active states, breadcrumbs, deep linking), data display patterns (tables with sort/filter/pagination/selection/responsive, lists, cards), feedback patterns (toast vs inline vs banner decision table, confirmation dialogs, progress indicators, optimistic updates), layout patterns (sidebar+main, dashboard grids with auto-fill, content density levels, responsive strategies, max-width by content type), search patterns (keyboard shortcut, debounce, arrow key navigation, empty states, URL-reflected filters), and modal/dialog patterns (modal vs page vs sheet decisions, focus trapping and return, dismiss behaviour, scroll lock, mobile adaptation, stacking avoidance, deep linking).
 
 ---
 
@@ -114,7 +114,7 @@ The visual, copy, and interaction counterpart to this suite. Covers motion, inte
 
 ## Learnings
 
-Each skill includes a `learnings.md` convention. After completing a task with a skill, patterns, edge cases, and library quirks are appended to a `learnings.md` file in that skill's folder. The skill consults this file before starting new tasks.
+Each skill includes a `learnings.md` convention. After completing a task with a skill, patterns, edge cases, and library quirks are appended to a `learnings.md` file in that installed skill's folder. The installer preserves these local runtime notes across suite updates.
 
 ---
 
