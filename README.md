@@ -1,24 +1,30 @@
 # UI Craft
 
-UI Craft is a two-suite skillset for building web interfaces with stronger structure, clearer naming, and better surface quality.
+UI Craft is a coordinator skill plus two domain suites for building web interfaces with stronger structure, clearer naming, and better surface quality.
 
 It contains:
 
-- **ui-craft**: an agent-facing coordinator skill for routing broad UI tasks and applying suite best practices.
-- **surface**: how interfaces look, read, move, respond, adapt to platform constraints, and feel in use.
-- **system**: what interface parts are made from, what they are called, and how they fit into a reusable system.
+- **ui-craft**: the agent-facing coordinator skill for routing broad UI tasks and applying suite best practices.
+- **surface**: the domain suite for how interfaces look, read, move, respond, adapt to platform constraints, and feel in use.
+- **system**: the domain suite for what interface parts are made from, what they are called, and how they fit into a reusable system.
 
 The suite is designed for Codex, Claude Code, and other agents that can read `SKILL.md` files with YAML frontmatter. Examples often use React, Tailwind, Radix, Base UI, shadcn/ui, and Motion because those stacks are common in agent-built web UI; treat them as examples or preferred defaults when already present, not as automatic dependencies.
 
 ---
 
-## Repository Structure
+## Key Repository Structure
 
 ```text
 ui-craft/
+├── README.md
+├── install.sh
+├── scripts/
+│   └── validate.sh
 ├── ui-craft/
 │   ├── SKILL.md
-│   └── agents/openai.yaml
+│   ├── agents/openai.yaml
+│   ├── learnings.md
+│   └── references/
 ├── surface/
 │   ├── README.md
 │   ├── accessibility.md
@@ -39,11 +45,12 @@ ui-craft/
     └── system-patterns/
 ```
 
-Each skill folder contains a `SKILL.md`. Some skills also include:
+Every skill folder contains:
 
-- `references/`: detailed guidance loaded only when needed. Shared references are copied into each skill that uses them so installed skills are self-contained.
+- `SKILL.md`: the skill trigger metadata and agent instructions.
 - `agents/openai.yaml`: UI metadata for OpenAI skill clients.
 - `learnings.md`: accumulated local edge cases and practical findings. The installer preserves installed learnings across updates.
+- `references/`: detailed guidance loaded only when needed. Shared references are copied into each skill that uses them so installed skills are self-contained.
 
 ---
 
